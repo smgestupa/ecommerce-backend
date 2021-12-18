@@ -1,6 +1,5 @@
 <script>
     import Loading from '../animated_svg/Loading.svelte';
-    import { isReachable } from 'is-reachable';
     let username = "Example";
     let isRefreshing, backendOnline = false;
 
@@ -8,18 +7,12 @@
         if ( isRefreshing ) return;
         isRefreshing = true;
 
-        try {
-            const req = await fetch( 'http://localhost:8093/', {
-                mode: 'no-cors'
-            } );
-            const status = await req.status;
-            
-            if ( status === 0 ) backendOnline = true;
-        } catch ( err ) {
-            console.error( 'Don\'t worry, most likely the URL is down.\n' + err );
-            backendOnline = false;
-        }
-
+        const req = await fetch( 'http://localhost:8093/', {
+            mode: 'no-cors'
+        } );
+        const status = await req.status;
+        
+        status === 0 ? backendOnline = true : backendOnline = false;
         isRefreshing = false;
     }
 </script>
@@ -60,7 +53,7 @@
             <span class="text-white">{ username }</span>.
         </h3>
         <span>/</span>
-        <a class="text-gray-300" href="#">View website</a>
+        <a class="text-gray-300" href="#">Activities</a>
         <span>/</span>
         <a class="text-gray-300" href="#">Options</a>
         <span>/</span>

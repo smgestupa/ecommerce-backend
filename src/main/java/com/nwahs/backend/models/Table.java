@@ -2,22 +2,22 @@ package com.nwahs.backend.models;
 
 public class Table {
 
-    private String table;
+    private String name;
     private String description;
 
     public Table() {}
 
-    public Table(String table, String description ) {
-        this.table = table;
+    public Table( String name, String description ) {
+        this.name = name;
         this.description = description;
     }
 
-    public String getTable() {
-        return table;
+    public String getName() {
+        return name;
     }
 
-    public void setTable(String table) {
-        this.table = table;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
