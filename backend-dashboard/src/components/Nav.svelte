@@ -6,13 +6,18 @@
     const checkBackendStatus = async () => {
         if ( isRefreshing ) return;
         isRefreshing = true;
-
-        const req = await fetch( 'http://localhost:8093/', {
-            mode: 'no-cors'
-        } );
-        const status = await req.status;
         
-        status === 0 ? backendOnline = true : backendOnline = false;
+        try {
+            const req = await fetch( 'http://localhost:8093', {
+                mode: 'no-cors'
+            } );
+            const status = await req.status;
+        
+            status === 0 ? backendOnline = true : backendOnline = false;
+        } catch ( err ) {
+            console.error( "Don\'t worry, most likely the backend is offline,\n" + err );
+        }
+    
         isRefreshing = false;
     }
 </script>

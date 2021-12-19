@@ -1,20 +1,23 @@
 <script>
     import Loading from "../animated_svg/Loading.svelte";
+    let tables = [];
 
     const fetchTables = async () => {
-        const req = await fetch( 'http://localhost:8093/api/v1/tables', {
+        try {
+            const req = await fetch( 'http://localhost:8093/api/v1/tables', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         } );
         const res = await req.json();
-
+        
         const authTables = res.filter( table => table.description === "authorization/authentication" );
-        const catalogTables = res.filter( table => table.description !== "authorization/authentication" );
-        const tables = [ authTables, catalogTables ];
-
-        return tables;
+        const catalogTables = res.filter( table => table.description === "catalog" );
+        tables = [ authTables, catalogTables ];
+        } catch ( err ) {
+            throw new Error( 'Something happened!' );
+        }
     }
 </script>
 
@@ -24,7 +27,7 @@
             <Loading />
         </div>
     </div>
-{ :then tables }
+{ :then _ }
     <div class="ml-12">
         <!-- Backend administration title -->
         <div class="text-2xl mb-6">
@@ -138,4 +141,6 @@
                 </div>
             </div>
         </div>
+{ :catch err }
+    <p class="text-white">{ err.message }</p>
 { /await }
