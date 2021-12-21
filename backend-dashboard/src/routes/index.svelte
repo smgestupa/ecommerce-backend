@@ -1,7 +1,9 @@
 <script>
     import { fade } from "svelte/transition";
+    import { dashboardRefresh, showConfirmDeleteTableModal } from "../stores/stores";
     import Loading from "../svg_animated/Loading.svelte";
     import Dashboard from "../components/index/Dashboard.svelte";
+    import ConfirmDeleteTable from "../components/modal/ConfirmDeleteTable.svelte";
     let tables = [];
 
     const fetchTables = async () => {
@@ -34,9 +36,15 @@
         </div>
     </div>
 { :then _ }
-    <div in:fade={ { duration: 300 } }>
-        <Dashboard tables={ tables } />
-    </div>
+    { #if $showConfirmDeleteTableModal }
+        <ConfirmDeleteTable />
+    { /if }
+    
+    { #if !$dashboardRefresh }
+        <div in:fade={ { duration: 300 } }>
+            <Dashboard tables={ tables } />
+        </div>
+    { /if }
 { :catch err }
     <div class="flex justify-center h-[50vh]">
         <div class="mt-[25vh] space-y-10">
