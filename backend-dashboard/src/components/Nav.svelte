@@ -1,5 +1,5 @@
 <script>
-    import Loading from '../animated_svg/Loading.svelte';
+    import Loading from '../svg_animated/Loading.svelte';
     let username = "Example";
     let isRefreshing, backendOnline = false;
 
@@ -13,9 +13,10 @@
             } );
             const status = await req.status;
         
-            status === 0 ? backendOnline = true : backendOnline = false;
+            if ( status === 0 ) backendOnline = true;
         } catch ( err ) {
             console.error( "Don\'t worry, most likely the backend is offline,\n" + err );
+            backendOnline = false;
         }
     
         isRefreshing = false;
@@ -25,26 +26,27 @@
 <div class="flex justify-between items-center text-gray-400 text-md bg-gray-500 mb-8 pt-10 pb-5">
     <!-- Backend website title and status -->
     <div class="flex items-center text-gray-300 ml-12 space-x-3">
-        <h1 class="text-2xl">Svelte + Spring Boot</h1>
+        <a class="text-2xl hover:text-white duration-300" href="/">Svelte + Spring Boot</a>
         <span>|</span>
 
         <!-- 
-            Make this clickable to refresh
-            the website status and this
-            will change the text
+            Making this to clickable, in order
+            to refresh and show the backend status
+            which will change the text, according
+            to status
         -->
         <h3 class="flex justify-center items-center text-red-400">
             { #await checkBackendStatus() }
-                <div class="absolute -scale-25 { isRefreshing ? '' : 'hidden' }">
+                <div class="absolute scale-[-45%]">
                     <Loading />
                 </div>
             { :then _ }
-                <div class="absolute -scale-25 { isRefreshing ? '' : 'hidden' }">
+                <div class="absolute scale-[-45%] { isRefreshing ? '' : 'hidden' }">
                     <Loading />
                 </div>
             { /await }
             <button class="{ isRefreshing ? 'opacity-0 cursor-default' : '' } 
-                { backendOnline ? 'text-green-400' : 'text-red-400' }" 
+                { backendOnline ? 'text-green-400' : 'text-red-400' } duration-300" 
             on:click|preventDefault={ checkBackendStatus }>
                 { backendOnline ? 'Backend is online' : 'Backend is offline' }
             </button>
@@ -58,10 +60,10 @@
             <span class="text-white">{ username }</span>.
         </h3>
         <span>/</span>
-        <a class="text-gray-300" href="#">Activities</a>
+        <a class="text-gray-300 hover:text-white duration-300" href="#">Activities</a>
         <span>/</span>
-        <a class="text-gray-300" href="#">Options</a>
+        <a class="text-gray-300 hover:text-white duration-300" href="#">Options</a>
         <span>/</span>
-        <h3 class="text-gray-300">Logout</h3>
+        <h3 class="text-gray-300 hover:text-white cursor-pointer duration-300">Logout</h3>
     </div>
 </div>

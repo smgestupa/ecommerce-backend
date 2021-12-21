@@ -2,3 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .text-stroke-blue {
+        --tw-text-opacity: 1;
+        -webkit-text-stroke: 1px rgb(147 197 253 / var(--tw-text-opacity));;
+    }
+}
