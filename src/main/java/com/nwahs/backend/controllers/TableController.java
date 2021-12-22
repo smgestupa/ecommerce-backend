@@ -5,14 +5,14 @@ import com.nwahs.backend.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping( Strings.apiPath )
@@ -93,7 +93,7 @@ public class TableController {
         return getTableRows( tableName );
     }
 
-    public ResponseEntity getTableRows( String tableName ) {
+    public ResponseEntity<?> getTableRows( String tableName ) {
         try ( final Connection conn = dataSource.getConnection() ) {
             // Prepare a query statement to
             // be executed later in your database
@@ -147,7 +147,7 @@ public class TableController {
         return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
     }
 
-    public ResponseEntity deleteTable( String tableName ) {
+    public ResponseEntity<?> deleteTable( String tableName ) {
         try ( final Connection conn = dataSource.getConnection() ) {
             // Prepare a query statement to be
             // executed later in your MySQL
