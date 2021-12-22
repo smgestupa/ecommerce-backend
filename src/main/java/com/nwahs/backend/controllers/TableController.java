@@ -78,17 +78,28 @@ public class TableController {
     // will try to get the rows in the [users] table
     @GetMapping( path = "/tables/{table}",
                  produces = "application/json" )
-    public Object getTableRows( @PathVariable( "table" ) String table ) {
-        // Try-with-resources is used in order for
-        // connections to be disposed and avoid
-        // connection leaks; Java will handle
-        // closing the connection
+    @ResponseBody
+    public Object tableRows( @PathVariable( "table" ) String tableName,
+                             @RequestParam( required = false ) boolean delete ) {
+        // If '?delete=true' is present in the url,
+        // e.g. .../api/v1/table/{tableName}?delete=true
+        // the table in {tableName} will be deleted
+        // through this method
+        if ( delete ) return deleteTable( tableName );
+
+        // If no other params are present in the url,
+        // then just fallback to returning all rows
+        // in the provided table name
+        return getTableRows( tableName );
+    }
+
+    public ResponseEntity getTableRows( String tableName ) {
         try ( final Connection conn = dataSource.getConnection() ) {
             // Prepare a query statement to
             // be executed later in your database
             // which will return the rows of the
             // specified table, if it exists
-            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + table );
+            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + tableName );
             final ResultSet res = statement.executeQuery();
             // Get the PreparedStatement's metadata
             // which will be used to get the
@@ -133,6 +144,31 @@ public class TableController {
         // the HTTP Status as the response,
         // in case the catch-block was
         // executed instead
+        return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+    }
+
+    public ResponseEntity deleteTable( String tableName ) {
+        try ( final Connection conn = dataSource.getConnection() ) {
+            // Prepare a query statement to be
+            // executed later in your MySQL
+            // database which will remove
+            // the table with the provided
+            // name
+            final PreparedStatement statement = conn.prepareStatement( "DROP TABLE " + tableName );
+            // This will execute the query statement
+            // and will return either 0 or 1, whenever
+            // the query was successfully executed
+            final int res = statement.executeUpdate();
+
+            // The 'res' variable should only
+            // have 0, since the statement will
+            // drop the table itself and no rows
+            // will be affected
+            if ( res == 0 ) return new ResponseEntity<>( HttpStatus.OK );
+        } catch ( Exception err ) {
+            System.err.println( err.getMessage() );
+        }
+
         return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
     }
 }
