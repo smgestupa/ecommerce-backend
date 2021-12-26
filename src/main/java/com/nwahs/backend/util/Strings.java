@@ -2,8 +2,8 @@ package com.nwahs.backend.util;
 
 public interface Strings {
 
-    String apiVersion = "v1"; // API Version
-    String apiPath = "/api/" + apiVersion; // API Base URL
+    short apiVersion = 1; // API Version
+    String apiPath = "/api/v" + apiVersion; // API Base URL
 
     // Address of the backend dashboard
     // in order to allow fetching data

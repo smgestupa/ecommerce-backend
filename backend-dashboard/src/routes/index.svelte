@@ -20,7 +20,7 @@
         const catalogTables = res.filter( table => table.description === "catalog" );
         tables = [ authTables, catalogTables ];
         } catch ( err ) {
-            throw new Error( 'It looks like the backend server isn\'t responding, you should check your Spring Boot application' );
+            throw new Error( 'It seems like the backend server isn\'t responding, try refreshing this page' );
         }
     }
 </script>
@@ -54,7 +54,7 @@
             <!-- Loading messages -->
             <div class="text-center space-y-2.5">
                 <h3 class="text-2xl text-red-400">{ err.message }</h3>
-                <h3 class="text-lg text-red-300">Most likely your backend is offline, you should check regardless.</h3>
+                <h3 class="text-lg text-red-300">Most likely your backend is offline, you should check your Spring Boot application</h3>
             </div>
         </div>
     </div>

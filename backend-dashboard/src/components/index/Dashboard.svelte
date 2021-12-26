@@ -28,9 +28,9 @@
                 <!-- Table contents -->
                 <div class="text-lg">
                     { #each tables[0] as authTable }
-                            <div class="flex justify-between font-bold text-blue-400 border-b border-gray-400 px-4 py-4">
+                            <div class="flex justify-between font-bold text-blue-400 border-b border-gray-400 px-4 py-4 hover:bg-white hover:bg-opacity-[3%]">
                                 <!-- Content title -->
-                                <a class="text-blue-300 cursor-pointer hover:text-blue-100 duration-300" 
+                                <a class="text-blue-300 cursor-pointer" 
                                 href="/table/{ authTable.name }">
                                     { authTable.name.charAt( 0 ).toUpperCase() + authTable.name.substring( 1 ) }
                                 </a>
@@ -68,9 +68,9 @@
                 <!-- Table contents -->
                 <div class="text-lg">
                     { #each tables[1] as catalogTable }
-                        <div class="flex justify-between font-bold text-blue-400 border-b border-gray-400 px-4 py-4">
+                        <div class="flex justify-between font-bold text-blue-400 border-b border-gray-400 px-4 py-4 hover:bg-white hover:bg-opacity-[3%]">
                             <!-- Content title -->
-                            <a class="text-blue-300 cursor-pointer hover:text-blue-100 duration-300" href="/table/{ catalogTable.name }">{ catalogTable.name.charAt(0).toUpperCase() + catalogTable.name.substring( 1 ) }</a>
+                            <a class="text-blue-300 cursor-pointer" href="/table/{ catalogTable.name }">{ catalogTable.name.charAt(0).toUpperCase() + catalogTable.name.substring( 1 ) }</a>
 
                             <!-- Content options -->
                             <div class="flex mr-12 space-x-8">

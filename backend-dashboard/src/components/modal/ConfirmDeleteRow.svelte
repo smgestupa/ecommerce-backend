@@ -1,23 +1,25 @@
 <script>
     import { fly, fade } from 'svelte/transition';
-    import { dashboardRefresh, showConfirmDeleteTableModal, confirmDeleteTable_Name } from "../../stores/stores.js";
+    import { confirmDeleteTable_Name, tableViewRefresh, showConfirmDeleteRowModal, confirmDeleteRow_Index } from "../../stores/stores.js";
     import { X, Warning } from "../../icons/svg.js";
 
     const closeModal = () =>{
-        $showConfirmDeleteTableModal = false;
+        $showConfirmDeleteRowModal = false;
     }
 
-    const deleteTable = async ( tableName ) => {
-        $dashboardRefresh = true;
+    const deleteRow = async ( tableName, rowIndex ) => {
+        $tableViewRefresh = true;
+        
+        console.log( tableName + " " + rowIndex );
 
-        try {
-            const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName }?delete=true` );
-        } catch ( err ) {
-            console.error( err );
-        }
+        // try {
+        //     const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName }?row=${ rowIndex }&delete=true` );
+        // } catch ( err ) {
+        //     console.error( err );
+        // }
 
-        $showConfirmDeleteTableModal = false;
-        $dashboardRefresh = false;
+        $showConfirmDeleteRowModal = false;
+        $tableViewRefresh = false;
     };
 </script>
 
@@ -27,7 +29,7 @@
             <div class="flex justify-between items-center">
                 <!-- Modal notif title -->
                 <div>
-                    <h3 class="text-xl pr-32">You are about to delete the <span class="font-bold text-2xl text-red-600 ">{ $confirmDeleteTable_Name }</span> table</h3>
+                    <h3 class="text-xl pr-32">You are about to delete the row no. <span class="font-bold text-2xl text-red-600 ">{ $confirmDeleteRow_Index }</span></h3>
                 </div>
 
                 <!-- Modal close button -->
@@ -51,7 +53,7 @@
             <div class="flex items-center mt-4 space-x-5">
                 <!-- Confirm button -->
                 <div class="cursor-pointer border-2 border-red-300 hover:border-red-400 rounded-md px-3 py-0.5 duration-300"
-                on:click={ deleteTable( $confirmDeleteTable_Name.toLowerCase() ) }>
+                on:click={ deleteRow( $confirmDeleteTable_Name.toLowerCase(), $confirmDeleteRow_Index ) }>
                     <button class="font-semibold text-lg text-red-600">Confirm</button>
                 </div>
 
