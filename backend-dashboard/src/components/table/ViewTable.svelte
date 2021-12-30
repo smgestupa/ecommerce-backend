@@ -1,8 +1,5 @@
 <script>
-    import { confirmDeleteRow_Index } from "../../stores/stores.js";
-    export let tableHeaders, tableRows;
-    
-    $confirmDeleteRow_Index = -1;
+    export let tableHeaders, tableRows, rowIndex, changeRowIndex, setTableData;
 </script>
 
 <div>
@@ -14,8 +11,12 @@
             { /each }
         </tr>
         { #each { length: Object.keys( tableRows ).length } as _, index }
-            <tr class="text-center bg-white hover:bg-blue-100 cursor-pointer duration-300" 
-            on:click={ () => $confirmDeleteRow_Index = index }>
+            <tr class="text-center 
+            { rowIndex === index + 1 ?
+            'bg-blue-100' :
+            'bg-white' }
+            hover:bg-blue-100 cursor-pointer duration-300"
+            on:click={ () => { changeRowIndex( index ); setTableData( index ) } }>
                 { #each Object.values( tableRows[ index ] ) as column }
                     <td class="px-4 py-2.5">{ column }</td> 
                 { /each }

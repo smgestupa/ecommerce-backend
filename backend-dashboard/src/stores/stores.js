@@ -1,21 +1,25 @@
 import { writable } from "svelte/store";
 
 const dashboardRefresh = writable( false );
-
-// ConfirmDeleteTable variables
-const showConfirmDeleteTableModal = writable( false );
-const confirmDeleteTable_Name = writable( `` );
-
-// ConfirmDeleteRow variables
 const tableViewRefresh = writable( false );
+
+// AddRow modal variable(s)
+const showAddRowModal = writable( false );
+
+// ConfirmDeleteRow modal variable(s)
 const showConfirmDeleteRowModal = writable( false );
-const confirmDeleteRow_Index = writable( -1 );
+
+// ConfirmDeleteTable modal variable(s)
+const showConfirmDeleteTableModal = writable( false );
+
+// EditRow modal variable(s)
+const showEditRowModal = writable( false );
 
 export { 
         dashboardRefresh,
-        showConfirmDeleteTableModal,
-        confirmDeleteTable_Name,
         tableViewRefresh,
+        showAddRowModal,
         showConfirmDeleteRowModal,
-        confirmDeleteRow_Index
+        showConfirmDeleteTableModal,
+        showEditRowModal
         }

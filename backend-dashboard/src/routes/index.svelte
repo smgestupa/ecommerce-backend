@@ -4,7 +4,7 @@
     import Loading from "../svg_animated/Loading.svelte";
     import Dashboard from "../components/index/Dashboard.svelte";
     import ConfirmDeleteTable from "../components/modal/ConfirmDeleteTable.svelte";
-    let tables = [];
+    let tables = [], selectedTable = "";
 
     const fetchTables = async () => {
         try {
@@ -23,6 +23,11 @@
             throw new Error( 'It seems like the backend server isn\'t responding, try refreshing this page' );
         }
     }
+
+    const openConfirmDeleteTableModal = ( tableName ) => {
+        selectedTable = tableName;
+        $showConfirmDeleteTableModal = true;
+    }
 </script>
 
 { #await fetchTables() } 
@@ -37,12 +42,13 @@
     </div>
 { :then _ }
     { #if $showConfirmDeleteTableModal }
-        <ConfirmDeleteTable />
+        <ConfirmDeleteTable tableName={ selectedTable } />
     { /if }
     
     { #if !$dashboardRefresh }
         <div in:fade={ { duration: 300 } }>
-            <Dashboard tables={ tables } />
+            <Dashboard tables={ tables }
+            openConfirmDeleteTableModal={ openConfirmDeleteTableModal } />
         </div>
     { /if }
 { :catch err }

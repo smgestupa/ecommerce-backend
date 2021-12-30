@@ -1,12 +1,7 @@
 <script>
-    import { showConfirmDeleteTableModal, confirmDeleteTable_Name } from "../../stores/stores.js";
+    import { showConfirmDeleteTableModal } from "../../stores/stores.js";
     import { Trash, Eye, CircularPlus } from "../../icons/svg.js";
-    export let tables;
-
-    const confirmDeleteTableModal = ( tableName ) => {
-        $showConfirmDeleteTableModal = true;
-        $confirmDeleteTable_Name = tableName;
-    }
+    export let tables, openConfirmDeleteTableModal;
 </script>
 
 <div class="ml-12">
@@ -92,7 +87,7 @@
 
                                 <!-- Delete button -->
                                 <button class="flex items-center font-semibold space-x-2 hover:text-red-200 duration-300" 
-                                on:click={ confirmDeleteTableModal( catalogTable.name.charAt( 0 ).toUpperCase() + catalogTable.name.substring( 1 ) ) }>
+                                on:click={ openConfirmDeleteTableModal( catalogTable.name.charAt( 0 ).toUpperCase() + catalogTable.name.substring( 1 ) ) }>
                                     <div class="text-red-400">
                                         <Trash />
                                     </div>

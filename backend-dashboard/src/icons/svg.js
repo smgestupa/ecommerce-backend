@@ -4,3 +4,6 @@ export { default as CircularPlus } from "./svg/CircularPlus.svelte";
 export { default as LeftArrow } from "./svg/Leftarrow.svelte";
 export { default as X } from "./svg/X.svelte";
 export { default as Warning } from "./svg/Warning.svelte";
+export { default as Info } from "./svg/Info.svelte";
+export { default as CircularCheck } from "./svg/CircularCheck.svelte";
+export { default as CircularCross } from "./svg/CircularCross.svelte";
