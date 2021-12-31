@@ -4,9 +4,9 @@
     import { X, Info } from "../../icons/svg.js";
     import ModalLoading from "./components/ModalLoading.svelte";
     import ModalStatus from "./components/ModalStatus.svelte";
-    export let tableName, tableHeaders, tableData, rowIndex;
-    const selectedColumnsData = Object.entries( tableData[ 1 ] );
-    const newColumnsData = Object.entries( tableData[ 1 ] );
+    export let tableName, tableHeaders, selectedTableData, rowIndex, tableRefresh;
+    const selectedColumnsData = Object.entries( selectedTableData[ 1 ] );
+    const newColumnsData = Object.entries( selectedTableData[ 1 ] );
     const statusMessage = "You have successfully edited the selected row.";
     let modalLoading = false, statusCode;
 
@@ -36,6 +36,7 @@
         }
 
         modalLoading = false;
+        tableRefresh();
         setTimeout( () => closeModal(), 5000 );
     }
 </script>

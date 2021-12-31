@@ -1,8 +1,9 @@
 <script>
-    export let tableHeaders, tableRows, rowIndex, changeRowIndex, setTableData;
+    import { fade } from "svelte/transition";
+    export let tableHeaders, tableRows, rowIndex, changeRowIndex, setSelectedTableData;
 </script>
 
-<div>
+<div in:fade={ { duration: 300 } }>
     <!-- Table headers & rows -->
     <table class="border-separate shadow-lg">
         <tr class="text-center uppercase">
@@ -16,7 +17,7 @@
             'bg-blue-100' :
             'bg-white' }
             hover:bg-blue-100 cursor-pointer duration-300"
-            on:click={ () => { changeRowIndex( index ); setTableData( index ) } }>
+            on:click={ () => { changeRowIndex( index ); setSelectedTableData( index ) } }>
                 { #each Object.values( tableRows[ index ] ) as column }
                     <td class="px-4 py-2.5">{ column }</td> 
                 { /each }

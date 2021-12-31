@@ -1,28 +1,11 @@
 <script context="module">
     export const load = async ( { page } ) => {
-        let tableRows, tableHeaders = [];
-        try {
-            const req = await fetch( `http://localhost:8093/api/v1/tables/${ page.params.table }`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            } );
-
-            tableRows = await req.json();
-
-            for ( let i = 0; i < Object.keys( tableRows[0] ).length; i++ ) {
-                tableHeaders.push( Object.keys( tableRows[0] )[i] );
-            }
-        } catch ( err ) {
-            throw new Error( `Something went wrong with getting the contents of table ${ page.params.table }.` );
-        }
-
-        return { props: { tableName: page.params.table, tableHeaders: tableHeaders, tableRows: tableRows } }
+        return { props: { tableName: page.params.table } }
     }
 </script>
 
 <script>
+    import { onMount } from "svelte";
     import { fade } from "svelte/transition";
     import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "../../stores/stores.js";
     import { LeftArrow } from "../../icons/svg.js";
@@ -30,20 +13,19 @@
     import AddRow from "../../components/modal/AddRow.svelte";
     import ConfirmDeleteRow from "../../components/modal/ConfirmDeleteRow.svelte";
     import EditRow from "../../components/modal/EditRow.svelte";
-    export let tableName, tableHeaders, tableRows;
+    export let tableName;
+    let viewTableRefresh = false;
+    let tableHeaders = [];
+    let tableRows = {};
     let rowIndex = -1;
     let rowData = {};
-    let tableData = {};
+    let selectedTableData = {};
 
     tableName = tableName.charAt( 0 ).toUpperCase() + tableName.substring( 1 );
 
     const changeRowIndex = ( index ) => {
         rowIndex = index + 1;
         rowData = JSON.stringify( Object.entries( tableRows )[ index ][ 1 ] );
-    }
-
-    const deleteRow = ( rowData ) => {
-        console.log( rowData );
     }
 
     const openAddRowModal = () => $showAddRowModal = true;
@@ -58,48 +40,77 @@
         $showEditRowModal = true;
     }
 
-    const setTableData = ( rowIndex ) => tableData = Object.entries( tableRows )[ rowIndex ];
+    const setSelectedTableData = ( rowIndex ) => selectedTableData = Object.entries( tableRows )[ rowIndex ];
+
+    const tableRefresh = async () => {
+        viewTableRefresh = true;
+
+        try {
+            const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            } );
+
+            tableRows = await req.json();
+            
+            tableHeaders = [];
+            for ( const header of Object.keys( tableRows[0] ) ) {
+                tableHeaders.push( header );
+            }
+        } catch ( err ) {
+            console.error( err );
+            throw new Error( `Something went wrong with getting the contents of table ${ tableName }.` );
+        }
+
+        viewTableRefresh = false;
+    };
 </script>
 
-{ #await { tableName, tableHeaders, tableRows } }
-    loading...
+
+<div class="ml-12" 
+in:fade={ { duration: 300 } }>
+    <div class="flex">
+        <!-- Back button -->
+        <a class="flex items-center text-gray-400 hover:text-white cursor-pointer mb-6 space-x-0.5 duration-300" 
+        href="/">
+            <div class="text-xl translate-y-0.5">
+                <!-- Left arrow SVG component -->
+                <LeftArrow />
+            </div>
+
+            <!-- Back button text -->
+            <div class="text-xl">
+                <h3 class="">Go back</h3>
+            </div>
+        </a>
+    </div>
+</div>
+
+{ #await tableRefresh() }
+    loading lmao...
 { :then _ }
     { #if $showAddRowModal }
         <AddRow tableName={ tableName }
-        tableHeaders={ tableHeaders }/>
+        tableHeaders={ tableHeaders }
+        tableRefresh={ tableRefresh }/>
     { /if }
 
     { #if $showConfirmDeleteRowModal }
         <ConfirmDeleteRow tableName={ tableName } 
         rowIndex={ rowIndex }
-        rowData={ rowData }/>
+        rowData={ rowData }
+        tableRefresh={ tableRefresh }/>
     { /if }
 
     { #if $showEditRowModal }
         <EditRow tableName={ tableName } 
         tableHeaders={ tableHeaders }
         rowIndex={ rowIndex }
-        tableData={ tableData }/>
+        selectedTableData={ selectedTableData }
+        tableRefresh={ tableRefresh }/>
     { /if }
-
-    <div class="ml-12" 
-    in:fade={ { duration: 300 } }>
-        <div class="flex">
-            <!-- Back button -->
-            <a class="flex items-center text-gray-400 hover:text-white cursor-pointer mb-6 space-x-0.5 duration-300" 
-            href="/">
-                <div class="text-xl translate-y-0.5">
-                    <!-- Left arrow SVG component -->
-                    <LeftArrow />
-                </div>
-
-                <!-- Back button text -->
-                <div class="text-xl">
-                    <h3 class="">Go back</h3>
-                </div>
-            </a>
-        </div>
-    </div>
 
     <div class="flex justify-center" in:fade={ { duration: 300 } }>
         <div class="text-center">
@@ -144,7 +155,7 @@
             tableRows={ tableRows }
             rowIndex={ rowIndex }
             changeRowIndex={ changeRowIndex }
-            setTableData={ setTableData }/>
+            setSelectedTableData={ setSelectedTableData }/>
         </div>
     </div>
 { /await }

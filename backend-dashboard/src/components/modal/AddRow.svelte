@@ -5,7 +5,7 @@
     import { X, Info } from "../../icons/svg.js";
     import ModalLoading from "./components/ModalLoading.svelte";
     import ModalStatus from "./components/ModalStatus.svelte";
-    export let tableName, tableHeaders;
+    export let tableName, tableHeaders, tableRefresh;
     const statusMessage = "You have successfully added row(s) to the database.";
     let rows = {};
     let disabledColumns = [];
@@ -39,6 +39,7 @@
         }
 
         modalLoading = false;
+        tableRefresh();
         setTimeout( () => closeModal(), 5000 );
     }
 
@@ -73,6 +74,7 @@
     }
 
     onMount( () => initializeRow() );
+    $: console.log( tableHeaders );
 </script>
 
 <div class="absolute inset-0 bg-black bg-opacity-25" out:fade={ { duration: 300 } }>
