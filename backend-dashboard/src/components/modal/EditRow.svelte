@@ -7,7 +7,7 @@
     export let tableName, tableHeaders, selectedTableData, rowIndex, tableRefresh;
     const selectedColumnsData = Object.entries( selectedTableData[ 1 ] );
     const newColumnsData = Object.entries( selectedTableData[ 1 ] );
-    const statusMessage = "You have successfully edited the selected row.";
+    const statusMessage = "You have successfully edited the selected row";
     let modalLoading = false, statusCode;
 
     const closeModal = () => $showEditRowModal = false;
@@ -22,7 +22,6 @@
         try {
             const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName }`, {
                 method: 'PUT',
-                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json'
                 },

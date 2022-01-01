@@ -5,7 +5,7 @@
     import ModalLoading from "./components/ModalLoading.svelte";
     import ModalStatus from "./components/ModalStatus.svelte";
     export let tableName, rowIndex, rowData, tableRefresh;
-    const statusMessage = "You have successfully delete the table " + tableName + ".";
+    const statusMessage = "You have successfully delete the table " + tableName;
     let modalLoading = false, statusCode;
 
     const closeModal = () =>{

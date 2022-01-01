@@ -5,7 +5,6 @@
 </script>
 
 <script>
-    import { onMount } from "svelte";
     import { fade } from "svelte/transition";
     import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "../../stores/stores.js";
     import { LeftArrow } from "../../icons/svg.js";
@@ -54,7 +53,7 @@
             } );
 
             tableRows = await req.json();
-            
+
             tableHeaders = [];
             for ( const header of Object.keys( tableRows[0] ) ) {
                 tableHeaders.push( header );

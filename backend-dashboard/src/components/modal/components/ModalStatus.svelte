@@ -24,10 +24,10 @@
         <div class="text-center w-[25rem] space-y-1">
             { #if success }
                 <h3 class="font-semibold text-2xl text-green-800">Success!</h3>
-                <h3 class="text-lg text-green-700">{ statusMessage } This will close in 5 seconds.</h3>
+                <h3 class="text-lg text-green-700">{ statusMessage }. This will close in 5 seconds.</h3>
             { :else }
                 <h3 class="text-2xl text-red-800">Failed.</h3>
-                <h3 class="text-lg text-red-700">Something went wrong! This will close in 5 seconds.</h3>
+                <h3 class="text-lg text-red-700">Something went wrong! Closing in 5 seconds.</h3>
             { /if }
         </div>
     </div>
