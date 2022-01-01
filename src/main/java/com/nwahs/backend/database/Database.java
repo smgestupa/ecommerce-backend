@@ -239,4 +239,40 @@ public class Database {
 
         return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
     }
+
+    protected ResponseEntity<?> deleteTableRow( String tableName, Map< String, Object > rowToBeDeleted  ) {
+        try ( final java.sql.Connection conn = dataSource.getConnection() ) {
+            final StringBuilder sqlStatement = new StringBuilder( "DELETE FROM " + tableName + " WHERE\n" );
+            sqlStatement.append( "    " +
+                    rowToBeDeleted.entrySet().iterator().next().getKey() + " = '" +
+                    rowToBeDeleted.entrySet().iterator().next().getValue() + "'" );
+
+            for ( Map.Entry< String, Object > column : rowToBeDeleted.entrySet() ) {
+                if ( rowToBeDeleted.entrySet().iterator().next().getKey().equals( column.getKey() ) ) continue;
+                sqlStatement.append( " AND\n    " + column.getKey() + " = " + " '" + column.getValue() + "'" );
+            }
+            sqlStatement.append( ";" );
+
+            // Prepare a query statement to be
+            // executed later in your MySQL
+            // database which will remove
+            // the table with the provided
+            // name
+            final PreparedStatement statement = conn.prepareStatement( sqlStatement.toString() );
+            // This will execute the query statement
+            // and will return either 0 or 1, whenever
+            // the query was successfully executed
+            final int res = statement.executeUpdate();
+
+            // The [res] variable should only
+            // have 0, since the statement will
+            // drop the table itself and no rows
+            // will be affected
+            if ( res == 1 ) return new ResponseEntity<>( HttpStatus.OK );
+        } catch ( Exception err ) {
+            System.err.println( err.getMessage() );
+        }
+
+        return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+    }
 }
