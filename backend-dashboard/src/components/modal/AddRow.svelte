@@ -3,8 +3,8 @@
     import { onMount } from 'svelte';
     import { showAddRowModal } from "$stores/stores.js";
     import { X, Info } from "$icons/svg.js";
-    import ModalLoading from "$components/ModalLoading.svelte";
-    import ModalStatus from "$components/ModalStatus.svelte";
+    import ModalLoading from "$components/modal/components/ModalLoading.svelte";
+    import ModalStatus from "$components/modal/components/ModalStatus.svelte";
     export let tableName, tableHeaders, tableRefresh;
     const statusMessage = "You have successfully added row(s) to the database";
     let rows = {};

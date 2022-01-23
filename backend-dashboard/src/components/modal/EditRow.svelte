@@ -2,8 +2,8 @@
     import { fly, fade } from 'svelte/transition';
     import { tableViewRefresh, showEditRowModal } from "$stores/stores.js";
     import { X, Info } from "$icons/svg.js";
-    import ModalLoading from "$components/ModalLoading.svelte";
-    import ModalStatus from "$components/ModalStatus.svelte";
+    import ModalLoading from "$components/modal/components/ModalLoading.svelte";
+    import ModalStatus from "$components/modal/components/ModalStatus.svelte";
     export let tableName, tableHeaders, selectedTableData, rowIndex, tableRefresh;
     const selectedColumnsData = Object.entries( selectedTableData[ 1 ] );
     const newColumnsData = Object.entries( selectedTableData[ 1 ] );
