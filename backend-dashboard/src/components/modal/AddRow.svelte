@@ -73,8 +73,14 @@
         return rowsToJSON;
     }
 
+    const removeTableRow = ( index ) => {
+        const rows = document.getElementById( "add-table" ).tBodies[ 0 ].rows.length;
+
+        if ( rows === 1 ) return;
+        document.getElementById( "add-table" ).deleteRow( index );
+    }
+
     onMount( () => initializeRow() );
-    $: console.log( tableHeaders );
 </script>
 
 <div class="absolute inset-0 bg-black bg-opacity-25" out:fade={ { duration: 300 } }>
@@ -109,12 +115,13 @@
                         <div class="text-2xl text-gray-600">
                             <Info />
                         </div>
-                        <h3 class="text-gray-600 w-[90%]">You can add or remove single/multiple rows, as well as disable columns.</h3>
+                        <h3 class="text-gray-600 w-[90%]">You can add single/multiple rows, drag to delete a column, and disable columns.</h3>
                     </div>
     
                     <!-- Table columns -->
                     <div class="flex justify-center items-center mt-4 mb-2.5 mr-5 space-x-5">
-                        <table class="border-separate">
+                        <table id="add-table"
+                        class="border-separate">
                             <tr class="items-center text-center uppercase">
                                 { #each tableHeaders as header }
                                     <th class="items-center font-semibold px-12 py-2 cursor-pointer
@@ -127,22 +134,26 @@
                                     </th>
                                 { /each }
                             </tr>
-                            { #each { length: numberOfRows } as _, i }
-                                <tr class="text-center bg-white" draggable=true>
-                                    { #each tableHeaders as header }
-                                        <td class=" 
-                                        { disabledColumns.includes( header ) ?
-                                        'text-white bg-gray-200' : 
-                                        'hover:bg-blue-100 focus-within:bg-blue-100' } 
-                                        duration-300">
-                                            <input class="px-4 py-2.5 outline-none bg-transparent" 
-                                            type="text"
-                                            disabled={ disabledColumns.includes( header ) }
-                                            bind:value={ rows[ header + "." + i ] }>
-                                        </td> 
-                                    { /each }
-                                </tr>
-                            { /each }
+                            <tbody>
+                                { #each { length: numberOfRows } as _, i }
+                                    <tr class="text-center bg-white" 
+                                    draggable=true
+                                    on:dragend={ () => removeTableRow( i ) } >
+                                        { #each tableHeaders as header }
+                                            <td class=" 
+                                            { disabledColumns.includes( header ) ?
+                                            'text-white bg-gray-200' : 
+                                            'hover:bg-blue-100 focus-within:bg-blue-100' } 
+                                            duration-300">
+                                                <input class="px-4 py-2.5 outline-none bg-transparent cursor-pointer" 
+                                                type="text"
+                                                disabled={ disabledColumns.includes( header ) }
+                                                bind:value={ rows[ header + "." + i ] }>
+                                            </td> 
+                                        { /each }
+                                    </tr>
+                                { /each }
+                            </tbody>
                         </table>
                     </div>
                     
