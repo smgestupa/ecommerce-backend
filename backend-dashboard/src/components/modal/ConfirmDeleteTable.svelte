@@ -1,7 +1,7 @@
 <script>
     import { fly, fade } from 'svelte/transition';
-    import { dashboardRefresh, showConfirmDeleteTableModal } from "../../stores/stores.js";
-    import { X, Warning } from "../../icons/svg.js";
+    import { dashboardRefresh, showConfirmDeleteTableModal } from "$stores/stores.js";
+    import { X, Warning } from "$icons/svg.js";
     export let tableName;
 
     const closeModal = () =>{

@@ -19,6 +19,7 @@
   },
   "type": "module",
   "dependencies": {
-    "is-reachable": "^5.1.1"
+    "is-reachable": "^5.1.1",
+    "path": "^0.12.7"
   }
 }

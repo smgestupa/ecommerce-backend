@@ -1,9 +1,9 @@
 <script>
     import { fly, fade } from 'svelte/transition';
-    import { tableViewRefresh, showConfirmDeleteRowModal } from "../../stores/stores.js";
-    import { X, Warning } from "../../icons/svg.js";
-    import ModalLoading from "./components/ModalLoading.svelte";
-    import ModalStatus from "./components/ModalStatus.svelte";
+    import { tableViewRefresh, showConfirmDeleteRowModal } from "$stores/stores.js";
+    import { X, Warning } from "$icons/svg.js";
+    import ModalLoading from "$components/ModalLoading.svelte";
+    import ModalStatus from "$components/ModalStatus.svelte";
     export let tableName, rowIndex, rowData, tableRefresh;
     const statusMessage = "You have successfully delete the table " + tableName;
     let modalLoading = false, statusCode;
