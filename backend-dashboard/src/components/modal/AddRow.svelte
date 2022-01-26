@@ -74,10 +74,10 @@
     }
 
     const removeTableRow = ( index ) => {
-        const rows = document.getElementById( "add-table" ).tBodies[ 0 ].rows.length;
+        const table = document.getElementById( "add-table" );
 
-        if ( rows === 1 ) return;
-        document.getElementById( "add-table" ).deleteRow( index );
+        if ( table.tBodies.length === 1 ) return;
+        table.removeChild( table.getElementsByTagName( "tbody" )[ index ] );
     }
 
     onMount( () => initializeRow() );
@@ -122,20 +122,22 @@
                     <div class="flex justify-center items-center mt-4 mb-2.5 mr-5 space-x-5">
                         <table id="add-table"
                         class="border-separate">
-                            <tr class="items-center text-center uppercase">
-                                { #each tableHeaders as header }
-                                    <th class="items-center font-semibold px-12 py-2 cursor-pointer
-                                    { disabledColumns.includes( header ) ? 
-                                    'bg-gray-400 text-white' :
-                                    'bg-blue-300 text-black hover:bg-gray-400 hover:text-white' }
-                                    duration-300"
-                                    on:click={ () => disableColumn( header ) }>
-                                        { header }
-                                    </th>
-                                { /each }
-                            </tr>
-                            <tbody>
-                                { #each { length: numberOfRows } as _, i }
+                            <thead>
+                                <tr class="items-center text-center uppercase">
+                                    { #each tableHeaders as header }
+                                        <th class="items-center font-semibold px-12 py-2 cursor-pointer
+                                        { disabledColumns.includes( header ) ? 
+                                        'bg-gray-400 text-white' :
+                                        'bg-blue-300 text-black hover:bg-gray-400 hover:text-white' }
+                                        duration-300"
+                                        on:click={ () => disableColumn( header ) }>
+                                            { header }
+                                        </th>
+                                    { /each }
+                                </tr>
+                            </thead>
+                            { #each { length: numberOfRows } as _, i }
+                                <tbody>
                                     <tr class="text-center bg-white" 
                                     draggable=true
                                     on:dragend={ () => removeTableRow( i ) } >
@@ -152,8 +154,8 @@
                                             </td> 
                                         { /each }
                                     </tr>
-                                { /each }
-                            </tbody>
+                                </tbody>
+                            { /each }
                         </table>
                     </div>
                     

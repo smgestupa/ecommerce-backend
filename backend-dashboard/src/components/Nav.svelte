@@ -52,18 +52,4 @@
             </button>
         </h3>
     </div>
-
-    <!-- Welcome and user-related options -->
-    <div class="flex text-lg mr-12 space-x-3">
-        <h3 class="text-gray-300">
-            Welcome,
-            <span class="text-white">{ username }</span>.
-        </h3>
-        <span>/</span>
-        <a class="text-gray-300 hover:text-white duration-300" href="#">Activities</a>
-        <span>/</span>
-        <a class="text-gray-300 hover:text-white duration-300" href="#">Options</a>
-        <span>/</span>
-        <h3 class="text-gray-300 hover:text-white cursor-pointer duration-300">Logout</h3>
-    </div>
 </div>

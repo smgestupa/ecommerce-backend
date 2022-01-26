@@ -99,31 +99,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- Recent activities / History -->
-        <div>
-            <div class="bg-gray-300 rounded-sm pl-5 pt-4 pb-8">
-                <!-- Title -->
-                <h3 class="text-xl pr-40">Recent activities</h3>
-
-                <!-- Custom horizontal bar -->
-                <div class="mt-5 mb-2.5 mr-5">
-                    <hr>
-                </div>
-
-                <!-- Activity history -->
-                <div class="mt-2.5 space-y-2">
-                    <div>
-                        <h3>None available</h3>
-                    </div>
-                    <div>
-                        <h3>None available</h3>
-                    </div>
-                    <div>
-                        <h3>None available</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
