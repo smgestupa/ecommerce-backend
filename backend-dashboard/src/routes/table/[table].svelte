@@ -12,6 +12,7 @@
     import AddRow from "../../components/modal/AddRow.svelte";
     import ConfirmDeleteRow from "../../components/modal/ConfirmDeleteRow.svelte";
     import EditRow from "../../components/modal/EditRow.svelte";
+    import Loading from "../../svg_animated/Loading.svelte";
     export let tableName;
     let viewTableRefresh = false;
     let tableHeaders = [];
@@ -59,8 +60,7 @@
                 tableHeaders.push( header );
             }
         } catch ( err ) {
-            console.error( err );
-            throw new Error( `Something went wrong with getting the contents of table ${ tableName }.` );
+            throw new Error( `Something went wrong with getting the contents of table ${ tableName }` );
         }
 
         viewTableRefresh = false;
@@ -155,6 +155,19 @@ in:fade={ { duration: 300 } }>
             rowIndex={ rowIndex }
             changeRowIndex={ changeRowIndex }
             setSelectedTableData={ setSelectedTableData }/>
+        </div>
+    </div>
+{:catch err }
+    <div class="flex justify-center h-[50vh]">
+        <div class="mt-[25vh] space-y-10">
+            <!-- Loading animated SVG component -->
+            <Loading />
+
+            <!-- Loading messages -->
+            <div class="text-center space-y-2.5">
+                <h3 class="text-2xl text-red-400">{ err.message }</h3>
+                <h3 class="text-lg text-red-300">Most likely this table has no existing rows, you should check this in your database</h3>
+            </div>
         </div>
     </div>
 { /await }

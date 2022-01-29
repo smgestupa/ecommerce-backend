@@ -1,6 +1,5 @@
 <script>
-    import { showConfirmDeleteTableModal } from "../../stores/stores.js";
-    import { Trash, Eye, CircularPlus } from "../../icons/svg.js";
+    import { Trash, Eye } from "$icons/svg.js";
     export let tables, openConfirmDeleteTableModal;
 </script>
 
@@ -39,14 +38,6 @@
                                         </div>
                                         <h3>View</h3>
                                     </a>
-    
-                                    <!-- Add button -->
-                                    <button class="flex items-center font-semibold space-x-2 hover:text-green-200 duration-300">
-                                        <div class="text-green-400">
-                                            <CircularPlus />
-                                        </div>
-                                        <h3>Add</h3>
-                                    </button>
                                 </div>
                             </div>
                     { /each }
@@ -76,14 +67,6 @@
                                     </div>
                                     <h3>View</h3>
                                 </a>
-
-                                <!-- Add button -->
-                                <button class="flex items-center font-semibold space-x-2 hover:text-green-200 duration-300">
-                                    <div class="text-green-400">
-                                        <CircularPlus />
-                                    </div>
-                                    <h3>Add</h3>
-                                </button>
 
                                 <!-- Delete button -->
                                 <button class="flex items-center font-semibold space-x-2 hover:text-red-200 duration-300" 
