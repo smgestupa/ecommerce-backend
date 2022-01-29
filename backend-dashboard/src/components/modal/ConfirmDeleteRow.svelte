@@ -49,7 +49,7 @@
                     <div class="flex justify-between items-center">
                         <!-- Modal notif title -->
                         <div>
-                            <h3 class="text-xl pr-32">You are about to delete the row no. <span class="font-bold text-2xl text-red-600 ">{ rowIndex }</span></h3>
+                            <h3 class="text-xl pr-32">You are about to delete the selected row</h3>
                         </div>
         
                         <!-- Modal close button -->
