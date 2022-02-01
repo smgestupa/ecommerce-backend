@@ -40,10 +40,9 @@
     }
 </script>
 
-<div class="absolute inset-0 bg-black bg-opacity-25" out:fade={ { duration: 300 } }>
-    <div class="flex justify-center">
-        <div class="mt-12 bg-gray-300 rounded-md" 
-        style="scrollbar-width: none" 
+<div class="modal" out:fade={ { duration: 300 } }>
+    <div>
+        <div class="modal-ui" 
         in:fly={ { y: -200, duration: 300 } }>
             { #if modalLoading }
                 <ModalLoading />
@@ -51,58 +50,57 @@
                 <ModalStatus statusCode={ statusCode }
                 statusMessage={ statusMessage }/>
             { :else }
-                <div class="pl-5 pt-3 pb-3 max-h-[40rem] overflow-auto scroll-smooth">
-                    <div class="flex justify-between items-center">
+                <div class="modal-section">
+                    <header class="modal-header">
                         <!-- Modal notif title -->
-                        <div>
-                            <h3 class="text-xl pr-32">You are currently editing the selected row</h3>
-                        </div>
+                        <h1>You are currently editing the selected row</h1>
         
                         <!-- Modal close button -->
-                        <div class="mr-5 translate-y-0.5">
-                            <button class="text-2xl text-gray-400 hover:text-gray-500 duration-300" 
-                            on:click={ () => closeModal() }>
+                        <section class="modal-close">
+                            <button on:click={ () => closeModal() }>
                                 <X />
                             </button>
-                        </div>
-                    </div>
+                        </section>
+                    </header>
         
                     <!-- Modal notif description -->
-                    <div class="flex items-center bg-gray-100 rounded-md mt-4 mb-2.5 mr-5 pl-2 pr-2 py-2 space-x-2">
-                        <div class="text-2xl text-gray-600">
+                    <div class="modal-description">
+                        <figure>
                             <Info />
-                        </div>
-                        <h3 class="text-gray-600 w-[90%]">You can edit all or specific columns of the selected row.</h3>
+                        </figure>
+                        <h3>You can edit all or specific columns of the selected row.</h3>
                     </div>
         
                     <!-- Table columns -->
-                    <div class="flex justify-center items-center mt-4 mb-2.5 mr-5 space-x-5">
-                        <table class="border-separate">
-                            <tr class="items-center text-center uppercase">
-                                { #each tableHeaders as header }
-                                    <th class="items-center font-semibold bg-blue-300 text-black px-12 py-2">
-                                        { header }
-                                    </th>
-                                { /each }
-                            </tr>
-                            <tr class="text-center bg-white">
-                                { #each { length: tableHeaders.length } as _, index }
-                                    <td class="hover:bg-blue-100 focus-within:bg-blue-100 duration-300">
-                                        <input class="px-4 py-2.5 outline-none bg-transparent" 
-                                        type="text"
-                                        bind:value={ newColumnsData[ index ][ 1 ] }>
-                                    </td> 
-                                { /each }
-                            </tr>
+                    <div class="modal-table-columns">
+                        <table>
+                            <thead>
+                                <tr class="modal-table-header">
+                                    { #each tableHeaders as header }
+                                        <th>
+                                            { header }
+                                        </th>
+                                    { /each }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="modal-table-row">
+                                    { #each { length: tableHeaders.length } as _, index }
+                                        <td>
+                                            <input type="text"
+                                            bind:value={ newColumnsData[ index ][ 1 ] }>
+                                        </td> 
+                                    { /each }
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     
                     <!-- Modal buttons -->
-                    <div class="flex items-center mt-6 space-x-3">
+                    <div class="modal-buttons">
                         <!-- Edit selected row button -->
-                        <div class="cursor-pointer bg-blue-400 hover:bg-blue-500 rounded-md px-3 py-1 shadow-lg duration-300">
-                            <button class="font-semibold text-lg text-white"
-                            on:click={ () => editRow() }>Edit selected row</button>
+                        <div class="modal-button-edit">
+                            <button on:click={ () => editRow() }>Edit selected row</button>
                         </div>
                     </div>
                 </div>

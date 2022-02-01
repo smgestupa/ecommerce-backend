@@ -1,6 +1,5 @@
 <script>
     import Loading from '../svg_animated/Loading.svelte';
-    let username = "Example";
     let isRefreshing, backendOnline = false;
 
     const checkBackendStatus = async () => {
@@ -23,10 +22,10 @@
     }
 </script>
 
-<div class="flex justify-between items-center text-gray-400 text-md bg-gray-500 mb-8 pt-10 pb-5">
+<nav>
     <!-- Backend website title and status -->
-    <div class="flex items-center text-gray-300 ml-12 space-x-3">
-        <a class="text-2xl hover:text-white duration-300" href="/">Svelte + Spring Boot</a>
+    <header class="nav-content">
+        <a class="nav-title" href="/">Svelte + Spring Boot</a>
         <span>|</span>
 
         <!-- 
@@ -35,21 +34,22 @@
             which will change the text, according
             to status
         -->
-        <h3 class="flex justify-center items-center text-red-400">
+        <h3 class="backend-status">
             { #await checkBackendStatus() }
-                <div class="absolute scale-[-45%]">
+                <div class="backend-status-loading">
                     <Loading />
                 </div>
             { :then _ }
-                <div class="absolute scale-[-45%] { isRefreshing ? '' : 'hidden' }">
+                <div class="backend-status-loading { isRefreshing ? '' : 'hidden' }">
                     <Loading />
                 </div>
             { /await }
-            <button class="{ isRefreshing ? 'opacity-0 cursor-default' : '' } 
-                { backendOnline ? 'text-green-400' : 'text-red-400' } duration-300" 
+            <button 
+            class="{ isRefreshing ? 'backend-status-text-loading' : '' } 
+            { backendOnline ? 'backend-status-online' : 'backend-status-offline' }" 
             on:click|preventDefault={ checkBackendStatus }>
                 { backendOnline ? 'Backend is online' : 'Backend is offline' }
             </button>
         </h3>
-    </div>
-</div>
+    </header>
+</nav>

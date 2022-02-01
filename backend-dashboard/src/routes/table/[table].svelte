@@ -68,33 +68,31 @@
 </script>
 
 
-<div class="ml-12" 
+<div class="back" 
 in:fade={ { duration: 300 } }>
-    <div class="flex">
-        <!-- Back button -->
-        <a class="flex items-center text-gray-400 hover:text-white cursor-pointer mb-6 space-x-0.5 duration-300" 
-        href="/">
-            <div class="text-xl translate-y-0.5">
-                <!-- Left arrow SVG component -->
-                <LeftArrow />
-            </div>
+    <!-- Back button -->
+    <a class="back-button" 
+    href="/">
+        <div class="back-arrow">
+            <!-- Left arrow SVG component -->
+            <LeftArrow />
+        </div>
 
-            <!-- Back button text -->
-            <div class="text-xl">
-                <h3 class="">Go back</h3>
-            </div>
-        </a>
-    </div>
+        <!-- Back button text -->
+        <div class="back-text">
+            <h3>Go back</h3>
+        </div>
+    </a>
 </div>
 
 { #await tableRefresh() }
-    <div class="flex justify-center h-[50vh]">
-        <div class="mt-[25vh] space-y-10">
+    <div class="loading">
+        <div class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
             <!-- Loading message -->
-            <h3 class="text-2xl text-gray-300">Please wait for the table to load...</h3>
+            <h3 class="loading-message">Please wait for the table to load...</h3>
         </div>
     </div>
 { :then _ }
@@ -119,38 +117,38 @@ in:fade={ { duration: 300 } }>
         tableRefresh={ tableRefresh }/>
     { /if }
 
-    <div class="flex justify-center" in:fade={ { duration: 300 } }>
-        <div class="text-center">
+    <div class="table" in:fade={ { duration: 300 } }>
+        <div class="table-content">
             <!-- Table name -->
-            <div class="mb-5">
-                <h1 class="font-bold text-white text-3xl">
-                    { tableName }
-                </h1>
+            <div class="table-overview">
+                <header class="table-overview-header">
+                    <h1>{ tableName }</h1>
+                </header>
 
                 <!-- Table rows buttons -->
-                <div class="flex justify-center items-center mt-5 space-x-5">
+                <div class="table-overview-options">
                     <!-- Add row button -->
-                    <button class="font-semibold text-lg text-green-400 border-[2.5px] border-green-200 rounded-md px-6 py-1.5 hover:border-green-400 duration-300 uppercase"
+                    <button 
+                    class="table-overview-add"
                     on:click={ () => openAddRowModal() }>
                         <h3>Add row/s</h3>
                     </button>
 
                     <!-- Edit button -->
-                    <button class="font-semibold text-lg
+                    <button class="table-overview-button
                     { rowIndex === -1 ?
-                    'text-gray-400 border-gray-200 hover:border-gray-400' :
-                    'text-blue-400 border-blue-200 hover:border-blue-400' }
-                    border-[2.5px] rounded-md px-8 py-1.5 duration-300 uppercase"
+                    'table-overview-inactive' :
+                    'table-overview-edit' }"
                     on:click={ () => openEditRowModal() }>
                         <h3>Edit row</h3>
                     </button>
 
                     <!-- Delete row button -->
-                    <button class="font-semibold text-lg
+                    <button class="table-overview-button
                     { rowIndex === -1 ? 
-                    'text-gray-400 border-gray-200 hover:border-gray-400' :
-                    'text-red-400 border-red-200 hover:border-red-400' } 
-                    border-[2.5px] rounded-md px-6 py-1.5 duration-300 uppercase"
+                    'table-overview-inactive' :
+                    'table-overview-delete' } 
+                    px-6"
                     on:click={ () => openConfirmDeleteRowModal() }>
                         <h3>Delete row</h3>
                     </button>
@@ -166,15 +164,15 @@ in:fade={ { duration: 300 } }>
         </div>
     </div>
 { :catch err }
-    <div class="flex justify-center h-[50vh]">
-        <div class="mt-[25vh] space-y-10">
+    <div class="loading">
+        <div class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
             <!-- Loading messages -->
-            <div class="text-center space-y-2.5">
-                <h3 class="text-2xl text-red-400">{ err.message }</h3>
-                <h3 class="text-lg text-red-300">Most likely this table has no existing rows, you should check this in your database</h3>
+            <div class="loading-error">
+                <h3 class="loading-error-message">{ err.message }</h3>
+                <h3 class="loading-error-submsg">Most likely this table has no existing rows, you should check this in your database</h3>
             </div>
         </div>
     </div>

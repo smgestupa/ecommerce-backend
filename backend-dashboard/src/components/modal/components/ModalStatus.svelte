@@ -5,29 +5,28 @@
     const success = statusCode === 200;
 </script>
 
-<div class="flex justify-center px-5 pt-16 pb-8 space-y-10" in:fade={ { duration: 300 } }>
-    <div class="space-y-14">
+<div class="modal-component" in:fade={ { duration: 300 } }>
+    <div class="modal-component-spacing">
         <!-- Component svg -->
-        <div class="flex justify-center scale-[250%]">
+        <header class="modal-component-header">
             { #if success }
-                <div class="text-green-500">
+                <figure class="modal-status-success">
                     <CircularCheck />
-                </div>
+                </figure>
             { :else }
-                <div class="text-red-500">
+                <figure class="modal-status-failed">
                     <CircularCross />
-                </div>
+                </figure>
             { /if }
-        </div>
+            </header>
 
         <!-- Component message -->
-        <div class="text-center w-[25rem] space-y-1">
+        <div class="modal-component-message">
             { #if success }
-                <h3 class="font-semibold text-2xl text-green-800">Success!</h3>
-                <h3 class="text-lg text-green-700">{ statusMessage }.</h3>
+                <h1 class="modal-message-success">Success!</h1>
+                <h3 class="modal-message-status">{ statusMessage }.</h3>
             { :else }
-                <h3 class="text-2xl text-red-800">Failed.</h3>
-                <h3 class="text-lg text-red-700">Something went wrong! Will be closing shortly.</h3>
+                <h3 class="modal-message-failed">Something went wrong! Will be closing shortly.</h3>
             { /if }
         </div>
     </div>

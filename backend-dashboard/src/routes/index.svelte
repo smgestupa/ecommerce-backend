@@ -31,13 +31,13 @@
 </script>
 
 { #await fetchTables() } 
-    <div class="flex justify-center h-[50vh]">
-        <div class="mt-[25vh] space-y-10">
+    <div class="loading">
+        <div class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
             <!-- Loading message -->
-            <h3 class="text-2xl text-gray-300">Please wait for the backend to respond back...</h3>
+            <h3 class="loading-message">Please wait for the backend to respond back...</h3>
         </div>
     </div>
 { :then _ }
@@ -52,15 +52,15 @@
         </div>
     { /if }
 { :catch err }
-    <div class="flex justify-center h-[50vh]">
-        <div class="mt-[25vh] space-y-10">
+    <div class="loading">
+        <div class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
             <!-- Loading messages -->
-            <div class="text-center space-y-2.5">
-                <h3 class="text-2xl text-red-400">{ err.message }</h3>
-                <h3 class="text-lg text-red-300">Most likely your backend is offline, you should check your Spring Boot application</h3>
+            <div class="loading-error">
+                <h3 class="loading-error-message">{ err.message }</h3>
+                <h3 class="loading-error-submsg">Most likely your backend is offline, you should check your Spring Boot application</h3>
             </div>
         </div>
     </div>
