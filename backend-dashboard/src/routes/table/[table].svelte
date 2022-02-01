@@ -60,7 +60,7 @@
                 tableHeaders.push( header );
             }
         } catch ( err ) {
-            throw new Error( `Something went wrong with getting the contents of table ${ tableName }` );
+            throw new Error( `Something went wrong with getting the contents of this table: ${ tableName }` );
         }
 
         viewTableRefresh = false;
@@ -88,7 +88,15 @@ in:fade={ { duration: 300 } }>
 </div>
 
 { #await tableRefresh() }
-    loading lmao...
+    <div class="flex justify-center h-[50vh]">
+        <div class="mt-[25vh] space-y-10">
+            <!-- Loading animated SVG component -->
+            <Loading />
+
+            <!-- Loading message -->
+            <h3 class="text-2xl text-gray-300">Please wait for the table to load...</h3>
+        </div>
+    </div>
 { :then _ }
     { #if $showAddRowModal }
         <AddRow tableName={ tableName }
@@ -157,7 +165,7 @@ in:fade={ { duration: 300 } }>
             setSelectedTableData={ setSelectedTableData }/>
         </div>
     </div>
-{:catch err }
+{ :catch err }
     <div class="flex justify-center h-[50vh]">
         <div class="mt-[25vh] space-y-10">
             <!-- Loading animated SVG component -->
