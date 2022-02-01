@@ -36,7 +36,7 @@
 
         modalLoading = false;
         tableRefresh();
-        setTimeout( () => closeModal(), 5000 );
+        setTimeout( () => closeModal(), 1500 );
     }
 </script>
 

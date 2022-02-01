@@ -1,9 +1,9 @@
 <script>
     import { fade } from "svelte/transition";
-    import { dashboardRefresh, showConfirmDeleteTableModal } from "../stores/stores";
+    import { dashboardRefresh, showConfirmDeleteTableModal } from "$stores/stores.js";
     import Loading from "../svg_animated/Loading.svelte";
-    import Dashboard from "../components/index/Dashboard.svelte";
-    import ConfirmDeleteTable from "../components/modal/ConfirmDeleteTable.svelte";
+    import Dashboard from "$components/index/Dashboard.svelte";
+    import ConfirmDeleteTable from "$components/modal/ConfirmDeleteTable.svelte";
     let tables = [], selectedTable = "";
 
     const fetchTables = async () => {
