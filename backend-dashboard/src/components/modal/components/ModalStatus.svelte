@@ -5,7 +5,7 @@
     const success = statusCode === 200;
 </script>
 
-<div class="modal-component" in:fade={ { duration: 300 } }>
+<section class="modal-component" in:fade={ { duration: 300 } }>
     <div class="modal-component-spacing">
         <!-- Component svg -->
         <header class="modal-component-header">
@@ -21,13 +21,13 @@
             </header>
 
         <!-- Component message -->
-        <div class="modal-component-message">
+        <section class="modal-component-message">
             { #if success }
                 <h1 class="modal-message-success">Success!</h1>
                 <h3 class="modal-message-status">{ statusMessage }.</h3>
             { :else }
                 <h3 class="modal-message-failed">Something went wrong! Will be closing shortly.</h3>
             { /if }
-        </div>
+        </section>
     </div>
-</div>
+</section>

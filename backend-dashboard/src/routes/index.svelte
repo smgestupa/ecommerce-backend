@@ -31,37 +31,37 @@
 </script>
 
 { #await fetchTables() } 
-    <div class="loading">
-        <div class="loading-header">
+    <section class="loading">
+        <header class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
             <!-- Loading message -->
             <h3 class="loading-message">Please wait for the backend to respond back...</h3>
-        </div>
-    </div>
+        </header>
+    </section>
 { :then _ }
     { #if $showConfirmDeleteTableModal }
         <ConfirmDeleteTable tableName={ selectedTable } />
     { /if }
     
     { #if !$dashboardRefresh }
-        <div in:fade={ { duration: 300 } }>
+        <main in:fade={ { duration: 300 } }>
             <Dashboard tables={ tables }
             openConfirmDeleteTableModal={ openConfirmDeleteTableModal } />
-        </div>
+        </main>
     { /if }
 { :catch err }
-    <div class="loading">
-        <div class="loading-header">
+    <section class="loading">
+        <header class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
             <!-- Loading messages -->
             <div class="loading-error">
-                <h3 class="loading-error-message">{ err.message }</h3>
+                <h1 class="loading-error-message">{ err.message }</h1>
                 <h3 class="loading-error-submsg">Most likely your backend is offline, you should check your Spring Boot application</h3>
             </div>
-        </div>
-    </div>
+        </header>
+    </section>
 { /await }

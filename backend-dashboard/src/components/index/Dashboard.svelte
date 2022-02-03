@@ -3,15 +3,15 @@
     export let tables, openConfirmDeleteTableModal;
 </script>
 
-<div class="dashboard">
+<section class="dashboard">
     <!-- Backend administration title -->
     <header class="dashboard-header">
         <h1>Backend administration</h1>
     </header>
 
-    <div class="dashboard-content">
+    <section class="dashboard-content">
         <!-- Tables -->
-        <div class="backend-tables">
+        <section class="backend-tables">
             <!-- Authentication and authorization -->
             <div>
                 <!-- Table title -->
@@ -20,16 +20,18 @@
                 </header>
                 
                 <!-- Table contents -->
-                <div class="dashboard-table-contents">
+                <section class="dashboard-table-contents">
                     { #each tables[0] as authTable }
-                            <div class="dashboard-table">
+                            <section class="dashboard-table">
                                 <!-- Content title -->
-                                <a href="/table/{ authTable.name }">
-                                    { authTable.name.charAt( 0 ).toUpperCase() + authTable.name.substring( 1 ) }
-                                </a>
+                                <header>
+                                    <a href="/table/{ authTable.name }">
+                                        { authTable.name.charAt( 0 ).toUpperCase() + authTable.name.substring( 1 ) }
+                                    </a>
+                                </header>
 
                                 <!-- Content options -->
-                                <div class="dashboard-table-options">
+                                <section class="dashboard-table-options">
                                     <!-- View button -->
                                     <a class="dashboard-table-view"
                                     href="/table/{ authTable.name }">
@@ -38,10 +40,10 @@
                                         </figure>
                                         <h3>View</h3>
                                     </a>
-                                </div>
-                            </div>
+                                </section>
+                            </section>
                     { /each }
-                </div>
+                </section>
             </div>
 
             <!-- Catalog -->
@@ -52,16 +54,18 @@
                 </header>
 
                 <!-- Table contents -->
-                <div class="dashboard-table-contents">
+                <section class="dashboard-table-contents">
                     { #each tables[1] as catalogTable }
-                        <div class="dashboard-table">
+                        <section class="dashboard-table">
                             <!-- Content title -->
-                            <a href="/table/{ catalogTable.name }">
-                                { catalogTable.name.charAt(0).toUpperCase() + catalogTable.name.substring( 1 ) }
-                            </a>
+                            <header>
+                                <a href="/table/{ catalogTable.name }">
+                                    { catalogTable.name.charAt(0).toUpperCase() + catalogTable.name.substring( 1 ) }
+                                </a>
+                            </header>
 
                             <!-- Content options -->
-                            <div class="dashboard-table-options">
+                            <section class="dashboard-table-options">
                                 <!-- View button -->
                                 <a class="dashboard-table-view"
                                 href="/table/{ catalogTable.name }">
@@ -79,11 +83,11 @@
                                     </figure>
                                     <h3>Delete</h3>
                                 </button>
-                            </div>
-                        </div>
+                            </section>
+                        </section>
                     { /each }
-                </div>
+                </section>
             </div>
-        </div>
-    </div>
-</div>
+        </section>
+    </section>
+</section>

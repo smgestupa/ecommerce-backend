@@ -40,9 +40,9 @@
     }
 </script>
 
-<div class="modal" out:fade={ { duration: 300 } }>
+<section class="modal" out:fade={ { duration: 300 } }>
     <div>
-        <div class="modal-ui" 
+        <section class="modal-ui" 
         in:fly={ { y: -200, duration: 300 } }>
             { #if modalLoading }
                 <ModalLoading />
@@ -50,7 +50,7 @@
                 <ModalStatus statusCode={ statusCode }
                 statusMessage={ statusMessage }/>
             { :else }
-                <div class="modal-section">
+                <section class="modal-section">
                     <header class="modal-header">
                         <!-- Modal notif title -->
                         <h1>You are currently editing the selected row</h1>
@@ -64,12 +64,12 @@
                     </header>
         
                     <!-- Modal notif description -->
-                    <div class="modal-description">
+                    <section class="modal-description">
                         <figure>
                             <Info />
                         </figure>
                         <h3>You can edit all or specific columns of the selected row.</h3>
-                    </div>
+                    </section>
         
                     <!-- Table columns -->
                     <div class="modal-table-columns">
@@ -97,14 +97,14 @@
                     </div>
                     
                     <!-- Modal buttons -->
-                    <div class="modal-buttons">
+                    <section class="modal-buttons">
                         <!-- Edit selected row button -->
                         <div class="modal-button-edit">
                             <button on:click={ () => editRow() }>Edit selected row</button>
                         </div>
-                    </div>
-                </div>
+                    </section>
+                </section>
             { /if }
-        </div>
+        </section>
     </div>
-</div>
+</section>

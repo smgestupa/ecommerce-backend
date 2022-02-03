@@ -24,9 +24,9 @@
     };
 </script>
 
-<div class="modal" out:fade={ { duration: 300 } }>
+<section class="modal" out:fade={ { duration: 300 } }>
     <div>
-        <div class="modal-ui-table" in:fly={ { y: -200, duration: 300 } }>
+        <section class="modal-ui-table" in:fly={ { y: -200, duration: 300 } }>
             <header class="modal-header">
                 <!-- Modal notif title -->
                 <h1>You are about to delete the <span class="modal-header-delete">{ tableName }</span> table</h1>
@@ -40,15 +40,15 @@
             </header>
 
             <!-- Modal notif description -->
-            <div class="modal-description-warning">
+            <section class="modal-description-warning">
                 <figure>
                     <Warning />
                 </figure>
                 <h3>Please confirm the action that you intend to do.</h3>
-            </div>
+            </section>
 
             <!-- Modal buttons -->
-            <div class="modal-buttons">
+            <section class="modal-buttons">
                 <!-- Confirm button -->
                 <div class="modal-button-delete"
                 on:click={ () => deleteTable() }>
@@ -60,7 +60,7 @@
                 on:click={ () => closeModal() }>
                     <button>Cancel</button>
                 </div>
-            </div>
-        </div>
+            </section>
+        </section>
     </div>
-</div>
+</section>

@@ -36,16 +36,16 @@
     };
 </script>
 
-<div class="modal" out:fade={ { duration: 300 } }>
+<section class="modal" out:fade={ { duration: 300 } }>
     <div>
-        <div class="modal-ui" in:fly={ { y: -200, duration: 300 } }>
+        <section class="modal-ui" in:fly={ { y: -200, duration: 300 } }>
             { #if modalLoading }
                 <ModalLoading />
             { :else if statusCode !== undefined }
                 <ModalStatus statusCode={ statusCode }
                 statusMessage={ statusMessage }/>
             { :else }
-                <div class="modal-section">
+                <section class="modal-section">
                     <header class="modal-header">
                         <!-- Modal notif title -->
                         <h1>You are about to delete the selected row</h1>
@@ -59,15 +59,15 @@
                     </header>
         
                     <!-- Modal notif description -->
-                    <div class="modal-description-warning">
+                    <section class="modal-description-warning">
                         <figure>
                             <Warning />
                         </figure>
                         <h3>Please confirm the action that you intend to do.</h3>
-                    </div>
+                    </section>
         
                     <!-- Modal buttons -->
-                    <div class="modal-buttons">
+                    <section class="modal-buttons">
                         <!-- Confirm button -->
                         <div class="modal-button-delete"
                         on:click={ () => deleteRow() }>
@@ -79,9 +79,9 @@
                         on:click={ () => closeModal() }>
                             <button>Cancel</button>
                         </div>
-                    </div>
-                </div>
+                    </section>
+                </section>
             { /if }
-        </div>
+        </section>
     </div>
-</div>
+</section>

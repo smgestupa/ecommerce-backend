@@ -3,7 +3,7 @@
     export let tableHeaders, tableRows, rowIndex, changeRowIndex, setSelectedTableData;
 </script>
 
-<div in:fade={ { duration: 300 } }>
+<section in:fade={ { duration: 300 } }>
     <!-- Table headers & rows -->
     <table class="view-table">
         <thead>
@@ -27,4 +27,4 @@
             { /each }
         </tbody>
     </table>
-</div>
+</section>

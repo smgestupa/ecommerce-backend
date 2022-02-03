@@ -68,7 +68,7 @@
 </script>
 
 
-<div class="back" 
+<section class="back" 
 in:fade={ { duration: 300 } }>
     <!-- Back button -->
     <a class="back-button" 
@@ -83,18 +83,18 @@ in:fade={ { duration: 300 } }>
             <h3>Go back</h3>
         </div>
     </a>
-</div>
+</section>
 
 { #await tableRefresh() }
-    <div class="loading">
-        <div class="loading-header">
+    <section class="loading">
+        <header class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
             <!-- Loading message -->
             <h3 class="loading-message">Please wait for the table to load...</h3>
-        </div>
-    </div>
+        </header>
+    </section>
 { :then _ }
     { #if $showAddRowModal }
         <AddRow tableName={ tableName }
@@ -117,10 +117,10 @@ in:fade={ { duration: 300 } }>
         tableRefresh={ tableRefresh }/>
     { /if }
 
-    <div class="table" in:fade={ { duration: 300 } }>
+    <main class="table" in:fade={ { duration: 300 } }>
         <div class="table-content">
             <!-- Table name -->
-            <div class="table-overview">
+            <section class="table-overview">
                 <header class="table-overview-header">
                     <h1>{ tableName }</h1>
                 </header>
@@ -153,7 +153,7 @@ in:fade={ { duration: 300 } }>
                         <h3>Delete row</h3>
                     </button>
                 </div>
-            </div>
+            </section>
 
             <!-- View table component -->
             <ViewTable tableHeaders={ tableHeaders }
@@ -162,10 +162,10 @@ in:fade={ { duration: 300 } }>
             changeRowIndex={ changeRowIndex }
             setSelectedTableData={ setSelectedTableData }/>
         </div>
-    </div>
+    </main>
 { :catch err }
-    <div class="loading">
-        <div class="loading-header">
+    <section class="loading">
+        <header class="loading-header">
             <!-- Loading animated SVG component -->
             <Loading />
 
@@ -174,6 +174,6 @@ in:fade={ { duration: 300 } }>
                 <h3 class="loading-error-message">{ err.message }</h3>
                 <h3 class="loading-error-submsg">Most likely this table has no existing rows, you should check this in your database</h3>
             </div>
-        </div>
-    </div>
+        </header>
+    </section>
 { /await }

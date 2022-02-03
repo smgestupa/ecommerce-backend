@@ -83,9 +83,9 @@
     onMount( () => initializeRow() );
 </script>
 
-<div class="modal" out:fade={ { duration: 300 } }>
+<section class="modal" out:fade={ { duration: 300 } }>
     <div>
-        <div class="modal-ui"
+        <section class="modal-ui"
         in:fly={ { y: -200, duration: 300 } }>
             { #if modalLoading }
                 <ModalLoading />
@@ -93,7 +93,7 @@
                 <ModalStatus statusCode={ statusCode }
                 statusMessage={ statusMessage }/>
             { :else }
-                <div class="modal-section">
+                <section class="modal-section">
                     <header class="modal-header">
                         <!-- Modal notif title -->
                         <h1>You are about to add rows to table <span class="modal-header-add">{ tableName }</span></h1>
@@ -107,15 +107,15 @@
                     </header>
     
                     <!-- Modal notif description -->
-                    <div class="modal-description">
+                    <section class="modal-description">
                         <figure>
                             <Info />
                         </figure>
                         <h3>You can add single/multiple rows, drag to delete a column, and disable columns.</h3>
-                    </div>
+                    </section>
     
                     <!-- Table columns -->
-                    <div class="modal-table-columns">
+                    <section class="modal-table-columns">
                         <table id="add-table">
                             <thead>
                                 <tr class="modal-table-add-header">
@@ -149,10 +149,10 @@
                                 </tbody>
                             { /each }
                         </table>
-                    </div>
+                    </section>
                     
                     <!-- Modal buttons -->
-                    <div class="modal-buttons">
+                    <section class="modal-buttons">
                         <!-- Add to table button -->
                         <div class="modal-button-add"
                         on:click={ () => addToTable() }>
@@ -164,9 +164,9 @@
                         on:click={ () => initializeRow() }>
                             <button>Add new row</button>
                         </div>
-                    </div>
-                </div>
+                    </section>
+                </section>
             { /if }
-        </div>
+        </section>
     </div>
-</div>
+</section>

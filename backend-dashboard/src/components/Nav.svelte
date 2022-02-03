@@ -36,13 +36,13 @@
         -->
         <h3 class="backend-status">
             { #await checkBackendStatus() }
-                <div class="backend-status-loading">
+                <section class="backend-status-loading">
                     <Loading />
-                </div>
+                </section>
             { :then _ }
-                <div class="backend-status-loading { isRefreshing ? '' : 'hidden' }">
+                <section class="backend-status-loading { isRefreshing ? '' : 'hidden' }">
                     <Loading />
-                </div>
+                </section>
             { /await }
             <button 
             class="{ isRefreshing ? 'backend-status-text-loading' : '' } 
