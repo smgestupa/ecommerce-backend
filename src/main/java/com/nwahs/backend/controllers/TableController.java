@@ -24,15 +24,38 @@ public class TableController extends Database {
         return getTables();
     }
 
-    // This will return all rows
+    // This will return 10 rows
     // that exist from the provided
     // {table} parameter
     // e.g. GET http://localhost:8093/api/v1/tables/users
     @GetMapping( path = "/tables/{table}",
-                 produces = "application/json" )
+            produces = "application/json" )
     public Object getTableRowsController( @PathVariable( "table" ) String tableName ) throws Exception {
+        return getTableRows( tableName, 0 );
+    }
 
-        return getTableRows( tableName );
+    // This will return 10 rows,
+    // starting from a specific
+    // offset through {offset}
+    // e.g. GET http://localhost:8093/api/v1/tables/users/10
+    @GetMapping( path = "/tables/{table}/{offset}",
+                 produces = "application/json" )
+    public Object getTableRowsController( @PathVariable( "table" ) String tableName,
+                                          @PathVariable( "offset" ) int offset ) throws Exception {
+        return getTableRows( tableName, offset );
+    }
+
+    // This will return a specific row
+    // based on a searchQuery, from the
+    // {column}
+    // e.g. GET http://localhost:8093/api/v1/tables/users/username
+    @GetMapping( path = "/tables/{table}/",
+            produces = "application/json" )
+    public Object searchTableRowController( @PathVariable( "table" ) String tableName,
+                                            @RequestParam( "column" ) String tableColumn,
+                                            @RequestParam( "search" ) String searchQuery ) throws Exception {
+        if ( searchQuery.trim().isEmpty() ) return getTableRows( tableName, 0 );
+        return searchTableRow( tableName, tableColumn, searchQuery );
     }
 
     // This will be used to add

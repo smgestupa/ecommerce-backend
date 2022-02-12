@@ -61,13 +61,13 @@ public class Database {
         return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
     }
 
-    protected ResponseEntity<?> getTableRows( String tableName ) {
+    protected ResponseEntity<?> getTableRows( String tableName, int offset ) {
         try ( final java.sql.Connection conn = dataSource.getConnection() ) {
             // Prepare a query statement to
             // be executed later in your database
             // which will return the rows of the
             // specified table, if it exists
-            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + tableName );
+            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + tableName + " LIMIT 10 OFFSET " + offset + ";" );
             final ResultSet res = statement.executeQuery();
             // Get the PreparedStatement's metadata
             // which will be used to get the
@@ -101,6 +101,38 @@ public class Database {
             }
 
             return new ResponseEntity<>( tableRows, HttpStatus.OK );
+        } catch ( Exception err ) {
+            System.err.println( err.getMessage() );
+        }
+
+        return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+    }
+
+    protected ResponseEntity<?> searchTableRow( String tableName, String tableColumn, String keyword ) {
+        try ( final java.sql.Connection conn = dataSource.getConnection() ) {
+            // Prepare a query statement that
+            // will search for a specific
+            // keyword using regex
+            final String statement = "SELECT * FROM " + tableName + " WHERE " + tableColumn + " IN ( '" + keyword + "' ) LIMIT 10;";
+            final PreparedStatement preparedStatement = conn.prepareStatement( statement );
+            final ResultSet result = preparedStatement.executeQuery();
+
+            final ResultSetMetaData metaData = result.getMetaData();
+
+            final HashMap<Integer, Object> searchedTableRows = new LinkedHashMap<>();
+
+            int index = 0;
+            while ( result.next() ) {
+                final HashMap<String, String> rowValues = new LinkedHashMap<>();
+                for ( int i = 1; i <= metaData.getColumnCount(); i++ ) {
+                    rowValues.put( metaData.getColumnName( i ), result.getString( i ) );
+                }
+                searchedTableRows.put( index++, rowValues );
+            }
+
+            System.out.println( searchedTableRows );
+
+            return new ResponseEntity<>( searchedTableRows, HttpStatus.OK );
         } catch ( Exception err ) {
             System.err.println( err.getMessage() );
         }
