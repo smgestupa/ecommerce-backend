@@ -8,6 +8,7 @@
     import { fade } from "svelte/transition";
     import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "../../stores/stores.js";
     import { LeftArrow } from "../../icons/svg.js";
+    import TableSearch from "../../components/table/TableSearch.svelte";
     import ViewTable from "../../components/table/ViewTable.svelte";
     import AddRow from "../../components/modal/AddRow.svelte";
     import ConfirmDeleteRow from "../../components/modal/ConfirmDeleteRow.svelte";
@@ -153,6 +154,8 @@ in:fade={ { duration: 300 } }>
                         <h3>Delete row</h3>
                     </button>
                 </div>
+
+                <TableSearch />
             </section>
 
             <!-- View table component -->

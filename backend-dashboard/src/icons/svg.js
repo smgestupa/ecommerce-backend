@@ -7,3 +7,4 @@ export { default as Warning } from "./svg/Warning.svelte";
 export { default as Info } from "./svg/Info.svelte";
 export { default as CircularCheck } from "./svg/CircularCheck.svelte";
 export { default as CircularCross } from "./svg/CircularCross.svelte";
+export { default as Search } from "./svg/Search.svelte";
