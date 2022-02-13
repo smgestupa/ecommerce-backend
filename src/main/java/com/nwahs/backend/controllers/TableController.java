@@ -38,11 +38,11 @@ public class TableController extends Database {
     // starting from a specific
     // offset through {offset}
     // e.g. GET http://localhost:8093/api/v1/tables/users/10
-    @GetMapping( path = "/tables/{table}/{offset}",
+    @GetMapping( path = "/tables/{table}/{page}",
                  produces = "application/json" )
     public Object getTableRowsController( @PathVariable( "table" ) String tableName,
-                                          @PathVariable( "offset" ) int offset ) throws Exception {
-        return getTableRows( tableName, offset );
+                                          @PathVariable( "page" ) int page ) throws Exception {
+        return getTableRows( tableName, page );
     }
 
     // This will return a specific row

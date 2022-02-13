@@ -61,13 +61,13 @@ public class Database {
         return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
     }
 
-    protected ResponseEntity<?> getTableRows( String tableName, int offset ) {
+    protected ResponseEntity<?> getTableRows( String tableName, int page ) {
         try ( final java.sql.Connection conn = dataSource.getConnection() ) {
             // Prepare a query statement to
             // be executed later in your database
             // which will return the rows of the
             // specified table, if it exists
-            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + tableName + " LIMIT 10 OFFSET " + offset + ";" );
+            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + tableName + " LIMIT 10 OFFSET " + ( page * 10 ) + ";" );
             final ResultSet res = statement.executeQuery();
             // Get the PreparedStatement's metadata
             // which will be used to get the
