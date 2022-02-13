@@ -54,7 +54,6 @@ public class TableController extends Database {
     public Object searchTableRowController( @PathVariable( "table" ) String tableName,
                                             @RequestParam( "column" ) String tableColumn,
                                             @RequestParam( "search" ) String searchQuery ) throws Exception {
-        if ( searchQuery.trim().isEmpty() ) return getTableRows( tableName, 0 );
         return searchTableRow( tableName, tableColumn, searchQuery );
     }
 

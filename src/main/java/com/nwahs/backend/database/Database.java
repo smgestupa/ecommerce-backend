@@ -130,8 +130,7 @@ public class Database {
                 searchedTableRows.put( index++, rowValues );
             }
 
-            System.out.println( searchedTableRows );
-
+            if ( searchedTableRows.isEmpty() ) return getTableRows( tableName, 0 );
             return new ResponseEntity<>( searchedTableRows, HttpStatus.OK );
         } catch ( Exception err ) {
             System.err.println( err.getMessage() );
