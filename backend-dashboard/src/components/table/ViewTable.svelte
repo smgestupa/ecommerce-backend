@@ -21,7 +21,7 @@
                 'bg-white' }"
                 on:click={ () => { changeRowIndex( index ); setSelectedTableData( index ) } }>
                     { #each Object.values( tableRows[ index ] ) as column }
-                        <td>{ column }</td> 
+                        <td>{ column.length > 15 ? column.slice( 0, 16 ) + "..." : column }</td> 
                     { /each }
                 </tr>
             { /each }
