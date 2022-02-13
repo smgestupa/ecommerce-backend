@@ -96,6 +96,7 @@
         else lastPage = false;
 
         pageNumber = page;
+        rowIndex = -1;
 
         tableRefresh();
     }
