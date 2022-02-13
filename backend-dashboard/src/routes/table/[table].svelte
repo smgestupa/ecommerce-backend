@@ -5,6 +5,7 @@
 </script>
 
 <script>
+    import { onMount } from "svelte";
     import { fade } from "svelte/transition";
     import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "../../stores/stores.js";
     import { LeftArrow } from "../../icons/svg.js";
@@ -15,6 +16,8 @@
     import EditRow from "../../components/modal/EditRow.svelte";
     import Loading from "../../svg_animated/Loading.svelte";
     export let tableName;
+    let tableHeaders = [];
+    let tableRows = {};
     let rowIndex = -1;
     let rowData = {};
     let selectedTableData = {};
@@ -23,7 +26,7 @@
 
     const changeRowIndex = ( index ) => {
         rowIndex = index + 1;
-        rowData = JSON.stringify( Object.entries( table.tableRows )[ index ][ 1 ] );
+        rowData = JSON.stringify( Object.entries( tableRows )[ index ][ 1 ] );
     }
 
     const openAddRowModal = () => $showAddRowModal = true;
@@ -38,21 +41,17 @@
         $showEditRowModal = true;
     }
 
-    const setSelectedTableData = ( rowIndex ) => selectedTableData = Object.entries( table.tableRows )[ rowIndex ];
+    const setSelectedTableData = ( rowIndex ) => selectedTableData = Object.entries( tableRows )[ rowIndex ];
 
-    const tableRefresh = async ( offset, column, query ) => {
+    const tableRefresh = async () => {
         try {
-            let tableRows = {};
-
-            if ( column !== undefined && query !== undefined ) tableRows = await searchRow( column, query );
-            else tableRows = await getTables();
-
-            let tableHeaders = [];
+            if ( Object.keys( tableRows ).length === 0 ) await getTables();
+            
+            tableHeaders = [];
             for ( const header of Object.keys( tableRows[0] ) ) {
                 tableHeaders.push( header );
             }
             
-            return { tableRows, tableHeaders };
         } catch ( err ) {
             throw new Error( `Something went wrong with getting the contents of this table: ${ tableName }` );
         }
@@ -66,19 +65,20 @@
                 }
             } );
 
-        return await req.json();
+        tableRows = await req.json();
     }
 
-     const searchRow = async ( column, query ) => {
-        const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }/?column=${ column }&search=${ query }`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            } );
-
-        return res;
-     }
+    const searchRow = async ( column, query ) => {
+    const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }/?column=${ column }&search=${ query }`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        } );
+    
+    tableRows = await req.json();
+    tableRefresh();
+    }
 </script>
 
 
@@ -109,10 +109,10 @@ in:fade={ { duration: 300 } }>
             <h3 class="loading-message">Please wait for the table to load...</h3>
         </header>
     </section>
-{ :then table }
+{ :then _ }
     { #if $showAddRowModal }
         <AddRow tableName={ tableName }
-        tableHeaders={ table.tableHeaders }
+        tableHeaders={ tableHeaders }
         tableRefresh={ tableRefresh }/>
     { /if }
 
@@ -125,7 +125,7 @@ in:fade={ { duration: 300 } }>
 
     { #if $showEditRowModal }
         <EditRow tableName={ tableName } 
-        tableHeaders={ table.tableHeaders }
+        tableHeaders={ tableHeaders }
         rowIndex={ rowIndex }
         selectedTableData={ selectedTableData }
         tableRefresh={ tableRefresh }/>
@@ -168,12 +168,13 @@ in:fade={ { duration: 300 } }>
                     </button>
                 </div>
 
-                <TableSearch columns={ table.tableHeaders }/>
+                <TableSearch columns={ tableHeaders }
+                searchRow={ searchRow }/>
             </section>
 
             <!-- View table component -->
-            <ViewTable tableHeaders={ table.tableHeaders }
-            tableRows={ table.tableRows }
+            <ViewTable tableHeaders={ tableHeaders }
+            tableRows={ tableRows }
             rowIndex={ rowIndex }
             changeRowIndex={ changeRowIndex }
             setSelectedTableData={ setSelectedTableData }/>
