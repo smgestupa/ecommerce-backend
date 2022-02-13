@@ -11,6 +11,7 @@
     import { LeftArrow } from "../../icons/svg.js";
     import TableSearch from "../../components/table/TableSearch.svelte";
     import ViewTable from "../../components/table/ViewTable.svelte";
+    import TablePage from "../../components/table/TablePage.svelte";
     import AddRow from "../../components/modal/AddRow.svelte";
     import ConfirmDeleteRow from "../../components/modal/ConfirmDeleteRow.svelte";
     import EditRow from "../../components/modal/EditRow.svelte";
@@ -21,6 +22,8 @@
     let rowIndex = -1;
     let rowData = {};
     let selectedTableData = {};
+    let pageNumber = 0;
+    let lastPage = false;
 
     tableName = tableName.charAt( 0 ).toUpperCase() + tableName.substring( 1 );
 
@@ -69,15 +72,32 @@
     }
 
     const searchRow = async ( column, query ) => {
-    const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }/?column=${ column }&search=${ query }`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        } );
-    
-    tableRows = await req.json();
-    tableRefresh();
+        const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }/?column=${ column }&search=${ query }`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            } );
+        
+        tableRows = await req.json();
+        tableRefresh();
+    }
+
+    const switchPageRow = async ( page, move ) => {
+        const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }/${ move ? --page : ++page }`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            } );
+        
+        tableRows = await req.json();
+        if ( Object.keys( tableRows ).length < 10 ) lastPage = true;
+        else lastPage = false;
+
+        pageNumber = page;
+
+        tableRefresh();
     }
 </script>
 
@@ -178,6 +198,11 @@ in:fade={ { duration: 300 } }>
             rowIndex={ rowIndex }
             changeRowIndex={ changeRowIndex }
             setSelectedTableData={ setSelectedTableData }/>
+
+            <!-- Table search component -->
+            <TablePage page={ pageNumber }
+            lastPage={ lastPage }
+            switchPageRow={ switchPageRow }/>
         </div>
     </main>
 { :catch err }

@@ -9,7 +9,7 @@
     }
 
     nav {
-        @apply flex justify-between items-center text-gray-400 bg-gray-500 mb-8 pt-10 pb-5;  
+        @apply flex justify-between items-center text-gray-400 bg-gray-500 mb-8 pt-5 pb-4;  
     }
 }
 
