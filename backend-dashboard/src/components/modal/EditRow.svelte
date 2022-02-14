@@ -66,7 +66,7 @@
                     <!-- Modal notif description -->
                     <section class="modal-description">
                         <figure>
-                            <Info />
+                            <Info class={ "info-modal-icon" } />
                         </figure>
                         <h3>You can edit all or specific columns of the selected row.</h3>
                     </section>

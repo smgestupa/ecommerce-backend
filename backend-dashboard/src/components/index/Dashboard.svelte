@@ -36,7 +36,7 @@
                                     <a class="dashboard-table-view"
                                     href="/table/{ authTable.name }">
                                         <figure>
-                                            <Eye />
+                                            <Eye class={ "view-icon" } />
                                         </figure>
                                         <h3>View</h3>
                                     </a>
@@ -70,7 +70,7 @@
                                 <a class="dashboard-table-view"
                                 href="/table/{ catalogTable.name }">
                                     <figure>
-                                        <Eye />
+                                        <Eye class={ "view-icon" } />
                                     </figure>
                                     <h3>View</h3>
                                 </a>
@@ -79,7 +79,7 @@
                                 <button class="dashboard-table-delete" 
                                 on:click={ openConfirmDeleteTableModal( catalogTable.name.charAt( 0 ).toUpperCase() + catalogTable.name.substring( 1 ) ) }>
                                     <figure>
-                                        <Trash />
+                                        <Trash class={ "delete-icon" } />
                                     </figure>
                                     <h3>Delete</h3>
                                 </button>

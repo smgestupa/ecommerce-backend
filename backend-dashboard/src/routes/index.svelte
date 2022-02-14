@@ -2,6 +2,7 @@
     import { fade } from "svelte/transition";
     import { dashboardRefresh, showConfirmDeleteTableModal } from "$stores/stores.js";
     import Loading from "../svg_animated/Loading.svelte";
+    import { Warning } from "$icons/svg.js";
     import Dashboard from "$components/index/Dashboard.svelte";
     import ConfirmDeleteTable from "$components/modal/ConfirmDeleteTable.svelte";
     let tables = [], selectedTable = "";
@@ -34,7 +35,9 @@
     <section class="loading">
         <header class="loading-header">
             <!-- Loading animated SVG component -->
-            <Loading />
+            <figure>
+                <Loading class={ "loading-icon" } />
+            </figure>
 
             <!-- Loading message -->
             <h3 class="loading-message">Please wait for the backend to respond back...</h3>
@@ -55,7 +58,9 @@
     <section class="loading">
         <header class="loading-header">
             <!-- Loading animated SVG component -->
-            <Loading />
+            <figure>
+                <Warning class={ "warning-icon" } />
+            </figure>
 
             <!-- Loading messages -->
             <div class="loading-error">

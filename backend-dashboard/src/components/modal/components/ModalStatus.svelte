@@ -10,12 +10,12 @@
         <!-- Component svg -->
         <header class="modal-component-header">
             { #if success }
-                <figure class="modal-status-success">
-                    <CircularCheck />
+                <figure>
+                    <CircularCheck class={ "modal-status-success" } />
                 </figure>
             { :else }
-                <figure class="modal-status-failed">
-                    <CircularCross />
+                <figure>
+                    <CircularCross class={ "modal-status-failed" } />
                 </figure>
             { /if }
             </header>

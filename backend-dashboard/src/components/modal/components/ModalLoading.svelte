@@ -7,7 +7,7 @@
     <div class="modal-component-spacing">
         <!-- Loading svg -->
         <figure class="modal-component-loading">
-            <Loading />
+            <Loading class={ "loading-icon" } />
         </figure>
 
         <!-- Component message -->

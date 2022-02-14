@@ -99,17 +99,17 @@
                         <h1>You are about to add rows to table <span class="modal-header-add">{ tableName }</span></h1>
     
                         <!-- Modal close button -->
-                        <section class="modal-close">
+                        <figure class="modal-close">
                             <button on:click={ () => closeModal() }>
                                 <X />
                             </button>
-                        </section>
+                        </figure>
                     </header>
     
                     <!-- Modal notif description -->
                     <section class="modal-description">
                         <figure>
-                            <Info />
+                            <Info class={ "info-modal-icon" } />
                         </figure>
                         <h3>You can add single/multiple rows, drag to delete a column, and disable columns.</h3>
                     </section>

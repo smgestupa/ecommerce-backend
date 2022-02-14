@@ -47,7 +47,7 @@
   }
 
   .back-button {
-    @apply mb-6 flex cursor-pointer items-center space-x-0.5 text-gray-400 duration-300 hover:text-white;
+    @apply mb-6 flex cursor-pointer items-center space-x-0.5 text-gray-400 fill-gray-400 duration-300 hover:text-white hover:fill-white;
   }
 
   .back-arrow {
@@ -187,10 +187,6 @@
     @apply mt-4 mb-2.5 mr-5 flex items-center space-x-2 rounded-md bg-gray-100 py-2 pl-2 pr-2;
   }
 
-  .modal-description figure {
-    @apply text-2xl text-gray-600;
-  }
-
   .modal-description h3 {
     @apply w-[90%] text-gray-600;
   }
@@ -263,10 +259,6 @@
     @apply mt-4 mb-2.5 mr-5 flex items-center space-x-2 rounded-md bg-red-100 py-2 pl-2 pr-2;
   }
 
-  .modal-description-warning figure {
-    @apply text-2xl text-red-600;
-  }
-
   .modal-description-warning h3 {
     @apply w-[90%] text-red-600;
   }
@@ -328,11 +320,11 @@
   }
 
   .modal-status-success {
-    @apply text-green-500;
+    @apply fill-green-500 scale-[2.5] m-auto;
   }
 
   .modal-status-failed {
-    @apply text-red-500;
+    @apply fill-red-500 scale-[2.5] m-auto;
   }
 
   .modal-component-message {
@@ -407,15 +399,31 @@
     @apply flex items-center space-x-2 font-semibold duration-300 hover:text-gray-200;
   }
 
-  .dashboard-table-view figure {
-    @apply text-white;
-  }
-
   .dashboard-table-delete {
     @apply flex items-center space-x-2 font-semibold duration-300 hover:text-red-200;
   }
 
-  .dashboard-table-delete figure {
-    @apply text-red-400;
+  .loading-icon {
+    @apply scale-[2.5] m-auto;
+  }
+
+  .warning-icon {
+    @apply scale-[7.5] m-auto fill-yellow-400;
+  }
+
+  .info-modal-icon {
+    @apply text-2xl fill-gray-600;
+  }
+
+  .warning-modal-icon {
+    @apply text-2xl fill-red-400;
+  }
+
+  .view-icon {
+    @apply fill-white;
+  }
+
+  .delete-icon {
+    @apply fill-red-400;
   }
 }

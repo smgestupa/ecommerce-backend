@@ -109,10 +109,10 @@ in:fade={ { duration: 300 } }>
     <!-- Back button -->
     <a class="back-button" 
     href="/">
-        <div class="back-arrow">
+        <figure>
             <!-- Left arrow SVG component -->
-            <LeftArrow />
-        </div>
+            <LeftArrow class={ "back-arrow" } />
+        </figure>
 
         <!-- Back button text -->
         <div class="back-text">
@@ -125,7 +125,9 @@ in:fade={ { duration: 300 } }>
     <section class="loading">
         <header class="loading-header">
             <!-- Loading animated SVG component -->
-            <Loading />
+            <figure>
+                <Loading class={ "loading-icon" }/>
+            </figure>
 
             <!-- Loading message -->
             <h3 class="loading-message">Please wait for the table to load...</h3>
@@ -211,8 +213,8 @@ in:fade={ { duration: 300 } }>
     <section class="loading">
         <header class="loading-header">
             <!-- Loading animated SVG component -->
-            <figure class="flex justify-center">
-                <Warning class={ "text-center scale-[7.5] m-auto fill-yellow-400" }/>
+            <figure>
+                <Warning class={ "warning-icon" }/>
             </figure>
 
             <!-- Loading messages -->

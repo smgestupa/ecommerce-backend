@@ -61,7 +61,7 @@
                     <!-- Modal notif description -->
                     <section class="modal-description-warning">
                         <figure>
-                            <Warning />
+                            <Warning class={ "warning-modal-icon" } />
                         </figure>
                         <h3>Please confirm the action that you intend to do.</h3>
                     </section>
