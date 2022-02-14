@@ -106,26 +106,6 @@
     @apply text-2xl duration-300 hover:text-white;
   }
 
-  .backend-status {
-    @apply flex items-center justify-center text-red-400;
-  }
-
-  .backend-status-loading {
-    @apply absolute scale-[-45%];
-  }
-
-  .backend-status-text-loading {
-    @apply cursor-default opacity-0;
-  }
-
-  .backend-status-online {
-    @apply text-green-400 duration-300;
-  }
-
-  .backend-status-offline {
-    @apply text-red-400 duration-300;
-  }
-
   .view-table {
     @apply border-separate shadow-lg;
   }

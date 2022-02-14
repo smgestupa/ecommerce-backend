@@ -25,31 +25,6 @@
 <nav>
     <!-- Backend website title and status -->
     <header class="nav-content">
-        <a class="nav-title" href="/">Svelte + Spring Boot</a>
-        <span>|</span>
-
-        <!-- 
-            Making this to clickable, in order
-            to refresh and show the backend status
-            which will change the text, according
-            to status
-        -->
-        <h3 class="backend-status">
-            { #await checkBackendStatus() }
-                <figure class="backend-status-loading">
-                    <Loading class={ "loading-icon" } />
-                </figure>
-            { :then _ }
-                <figure class="backend-status-loading { isRefreshing ? '' : 'hidden' }">
-                    <Loading class={ "loading-icon" } />
-                </figure>
-            { /await }
-            <button 
-            class="{ isRefreshing ? 'backend-status-text-loading' : '' } 
-            { backendOnline ? 'backend-status-online' : 'backend-status-offline' }" 
-            on:click|preventDefault={ checkBackendStatus }>
-                { backendOnline ? 'Backend is online' : 'Backend is offline' }
-            </button>
-        </h3>
+        <a class="nav-title" href="/">E-Commerce Backend Dashboard</a>
     </header>
 </nav>
