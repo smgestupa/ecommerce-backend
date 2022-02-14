@@ -70,6 +70,7 @@
             } );
 
         tableRows = await req.json();
+        if ( Object.keys( tableRows ).length < 10 ) lastPage = true;
     }
 
     const searchRow = async ( column, query ) => {
