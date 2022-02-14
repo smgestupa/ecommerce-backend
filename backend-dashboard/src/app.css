@@ -47,7 +47,7 @@
   }
 
   .back-button {
-    @apply mb-6 flex cursor-pointer items-center space-x-0.5 text-gray-400 fill-gray-400 duration-300 hover:text-white hover:fill-white;
+    @apply mb-6 flex cursor-pointer items-center space-x-0.5 fill-gray-400 text-gray-400 duration-300 hover:fill-white hover:text-white;
   }
 
   .back-arrow {
@@ -320,11 +320,11 @@
   }
 
   .modal-status-success {
-    @apply fill-green-500 scale-[2.5] m-auto;
+    @apply m-auto scale-[2.5] fill-green-500;
   }
 
   .modal-status-failed {
-    @apply fill-red-500 scale-[2.5] m-auto;
+    @apply m-auto scale-[2.5] fill-red-500;
   }
 
   .modal-component-message {
@@ -404,19 +404,19 @@
   }
 
   .loading-icon {
-    @apply scale-[2.5] m-auto;
+    @apply m-auto scale-[2.5];
   }
 
   .warning-icon {
-    @apply scale-[7.5] m-auto fill-yellow-400;
+    @apply m-auto scale-[7.5] fill-yellow-400;
   }
 
   .info-modal-icon {
-    @apply text-2xl fill-gray-600;
+    @apply fill-gray-600 text-2xl;
   }
 
   .warning-modal-icon {
-    @apply text-2xl fill-red-400;
+    @apply fill-red-400 text-2xl;
   }
 
   .view-icon {
