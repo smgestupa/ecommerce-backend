@@ -23,7 +23,7 @@
     }
 
     .loading-header {
-        @apply mt-[25vh] space-y-10;
+        @apply mt-[25vh] space-y-16;
     }
 
     .loading-message {
@@ -35,11 +35,11 @@
     }
 
     .loading-error-message {
-        @apply text-2xl text-red-400;
+        @apply text-3xl text-red-400;
     }
 
     .loading-error-submsg {
-        @apply text-lg text-red-300;
+        @apply text-xl text-red-300;
     }
 
     .back {
