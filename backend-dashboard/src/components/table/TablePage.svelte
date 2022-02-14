@@ -4,9 +4,10 @@
 </script>
 
 <!-- Pages list -->
-<section class="flex justify-center mt-6 mb-5">
-    <div class="flex items-center space-x-2.5">
-        <button class="top-1/2 font-semibold text-lg text-black bg-blue-200 rounded-md px-3 cursor-pointer py-1.5 hover:bg-blue-300 duration-300"
+<section class="page-section">
+    <div class="pages">
+        <button class="page-button"
+        class:page-button-disabled={ page === 0 }
         on:click={ switchPageRow( page, true ) }
         disabled={ page === 0 }>
             <span>←</span>
@@ -16,7 +17,8 @@
             { page + 1 }
         </div>
         
-        <button class="top-1/2 font-semibold text-lg text-black bg-blue-200 rounded-md px-3 cursor-pointer py-1.5 hover:bg-blue-300 duration-300"
+        <button class="page-button"
+        class:page-button-disabled={ lastPage }
         on:click={ switchPageRow( page, false ) }
         disabled={ lastPage }>
             <span>→</span>

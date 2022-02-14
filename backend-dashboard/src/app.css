@@ -426,4 +426,32 @@
   .delete-icon {
     @apply fill-red-400;
   }
+
+  .search-section {
+    @apply flex justify-start my-5 space-x-3;
+  }
+
+  .search-input {
+    @apply rounded-md pl-2.5 pr-3.5 w-full outline-none;
+  }
+
+  .search-button {
+    @apply top-1/2 font-semibold text-lg text-gray-700 bg-gray-200 rounded-md px-6 py-2.5 hover:bg-gray-300 duration-300;
+  }
+
+  .page-section {
+    @apply flex justify-center mt-6 mb-5;
+  }
+
+  .pages {
+    @apply flex items-center space-x-2.5;
+  }
+
+  .page-button {
+    @apply top-1/2 font-semibold text-lg text-black bg-blue-200 rounded-md px-3 cursor-pointer py-1.5 hover:bg-blue-300 duration-300;
+  }
+
+  .page-button-disabled {
+    @apply top-1/2 font-semibold text-lg text-black bg-gray-400 rounded-md px-3 cursor-default py-1.5 !important;
+  }
 }
