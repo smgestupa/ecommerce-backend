@@ -4,419 +4,418 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply bg-gray-700;
-    }
+  body {
+    @apply bg-gray-700;
+  }
 
-    nav {
-        @apply flex justify-between items-center text-gray-400 bg-gray-500 mb-8 pt-5 pb-4;  
-    }
+  nav {
+    @apply mb-8 flex items-center justify-between bg-gray-500 pt-5 pb-4 text-gray-400;
+  }
 }
 
 @layer components {
-    #columns {
-        @apply top-1/4 text-gray-700 bg-gray-200 rounded-md px-1 py-2 hover:bg-gray-300 duration-300;
-    }
-
-    .loading {
-        @apply flex justify-center h-[50vh];
-    }
-
-    .loading-header {
-        @apply mt-[25vh] space-y-16;
-    }
-
-    .loading-message {
-        @apply text-2xl text-gray-300;
-    }
-
-    .loading-error {
-        @apply text-center space-y-2.5;
-    }
-
-    .loading-error-message {
-        @apply text-3xl text-red-400;
-    }
-
-    .loading-error-submsg {
-        @apply text-xl text-red-300;
-    }
-
-    .back {
-        @apply flex ml-12;
-    }
-
-    .back-button {
-        @apply flex items-center text-gray-400 hover:text-white cursor-pointer mb-6 space-x-0.5 duration-300;
-    }
-
-    .back-arrow {
-        @apply text-xl translate-y-0.5;
-    }
-
-    .back-text {
-        @apply text-xl;
-    }
-
-    .table {
-        @apply flex justify-center !important;
-    }
-
-    .table-content {
-        @apply text-center;
-    }
-
-    .table-overview {
-        @apply mb-5;
-    }
-
-    .table-overview-header h1 {
-        @apply font-bold text-white text-3xl;
-    }
-
-    .table-overview-options {
-        @apply flex justify-center items-center mt-5 space-x-5;
-    }
-    
-    .table-overview-button {
-        @apply font-semibold text-lg border-[2.5px] rounded-md px-8 py-1.5 duration-300 uppercase;
-    }
-
-    .table-overview-inactive {
-        @apply font-semibold text-lg text-gray-400 border-gray-200 hover:border-gray-400;
-    }
-
-    .table-overview-add {
-        @apply font-semibold text-lg text-green-400 border-[2.5px] border-green-200 rounded-md px-6 py-1.5 hover:border-green-400 duration-300 uppercase;
-    }
-
-    .table-overview-edit {
-        @apply text-blue-400 border-blue-200 hover:border-blue-400;
-    }
-
-    .table-overview-delete {
-        @apply text-red-400 border-red-200 hover:border-red-400;
-    }
-
-    .nav-content {
-        @apply flex items-center text-gray-300 ml-12 space-x-3;
-    }
-
-    .nav-title {
-        @apply text-2xl hover:text-white duration-300;
-    }
-
-    .backend-status {
-        @apply flex justify-center items-center text-red-400;
-    }
-
-    .backend-status-loading {
-        @apply absolute scale-[-45%];
-    }
-
-    .backend-status-text-loading {
-        @apply opacity-0 cursor-default;
-    }
-
-    .backend-status-online {
-        @apply text-green-400 duration-300;
-    }
-
-    .backend-status-offline {
-        @apply text-red-400 duration-300;
-    }
-
-    .view-table {
-        @apply border-separate shadow-lg;
-    }
-
-    .table-header {
-        @apply text-center uppercase;
-    }
-
-    .table-header th {
-        @apply bg-blue-300 font-semibold px-12 py-2;
-    }
-
-    .table-row {
-        @apply text-center hover:bg-blue-100 cursor-pointer duration-300;
-    }
-
-    .table-row td {
-        @apply px-4 py-2.5;
-    }
-
-    .modal {
-        @apply flex justify-center absolute inset-0 bg-black bg-opacity-25;
-    }
-
-    .modal-ui {
-        @apply mt-12 bg-gray-300 rounded-md;
-        scrollbar-width: none;
-    }
-
-    .modal-section {
-        @apply pl-5 pt-3 pb-3 max-h-[40rem] overflow-auto scroll-smooth;
-    }
-
-    .modal-header {
-        @apply flex justify-between items-center;
-    }
-
-    .modal-header h1 {
-        @apply text-xl pr-32;
-    }
-
-    .modal-header-delete {
-        @apply font-bold text-2xl text-red-600;
-    }
-
-    .modal-header-add {
-        @apply font-bold text-2xl text-green-600;
-    }
-
-    .modal-close {
-        @apply mr-5 translate-y-0.5;
-    }
-
-    .modal-close button {
-        @apply text-2xl text-gray-400 hover:text-gray-500 duration-300;
-    }
-
-    .modal-description {
-        @apply flex items-center bg-gray-100 rounded-md mt-4 mb-2.5 mr-5 pl-2 pr-2 py-2 space-x-2;
-    }
-
-    .modal-description figure {
-        @apply text-2xl text-gray-600;
-    }
-
-    .modal-description h3 {
-        @apply text-gray-600 w-[90%];
-    }
-
-    .modal-table-columns {
-        @apply flex justify-center items-center mt-4 mb-2.5 mr-5 space-x-5;
-    }
-
-    .modal-table-columns table {
-        @apply border-separate;
-    }
-
-    .modal-table-header {
-        @apply items-center text-center uppercase;
-    }
-
-    .modal-table-header th {
-        @apply items-center font-semibold bg-blue-300 text-black px-12 
-        py-2;
-    }
-
-    .modal-table-header-disabled {
-
-    }
-
-    .modal-table-row {
-        @apply text-center bg-white;
-    }
-
-    .modal-table-row td {
-        @apply hover:bg-blue-100 focus-within:bg-blue-100 duration-300;
-    }
-
-    .modal-table-row input {
-        @apply px-4 py-2.5 outline-none bg-transparent;
-    }
-
-    .modal-buttons {
-        @apply flex items-center mt-6 space-x-3;
-    }
-
-    .modal-button-add {
-        @apply cursor-pointer bg-green-400 hover:bg-green-500 rounded-md px-3 py-1 shadow-lg duration-300;
-    }
-
-    .modal-button-add button {
-        @apply font-semibold text-lg text-white;
-    }
-
-    .modal-button-row {
-        @apply cursor-pointer bg-blue-400 hover:bg-blue-500 rounded-md px-3 py-1 shadow-lg duration-300;
-    }
-
-    .modal-button-row button {
-        @apply font-semibold text-lg text-white;
-    }
-
-    .modal-button-edit {
-        @apply cursor-pointer bg-blue-400 hover:bg-blue-500 rounded-md px-3 py-1 shadow-lg duration-300;
-    }
-
-    .modal-button-edit button {
-        @apply font-semibold text-lg text-white;
-    }
-
-    .modal-ui-table {
-        @apply mt-12 bg-gray-300 pl-5 pt-3 pb-5 rounded-md;
-    }
-
-    .modal-description-warning {
-        @apply flex items-center bg-red-100 rounded-md mt-4 mb-2.5 mr-5 pl-2 pr-2 py-2 space-x-2;
-    }
-
-    .modal-description-warning figure {
-        @apply text-2xl text-red-600;
-    }
-
-    .modal-description-warning h3 {
-        @apply text-red-600 w-[90%];
-    }
-
-    .modal-button-delete {
-        @apply cursor-pointer border-2 border-red-300 hover:border-red-400 rounded-md px-3 py-0.5 duration-300;
-    }
-
-    .modal-button-delete button {
-        @apply font-semibold text-lg text-red-600;
-    }
-
-    .modal-button-cancel {
-        @apply cursor-pointer border-2 border-gray-400 bg-gray-400 hover:border-gray-500 hover:bg-gray-500 rounded-md px-5 py-0.5 duration-300;
-    }
-
-    .modal-button-cancel button {
-        @apply font-semibold text-lg text-white;
-    }
-
-    .modal-table-add-header {
-        @apply items-center text-center uppercase;
-    }
-
-    .modal-table-add-header-enabled {
-        @apply items-center font-semibold px-12 py-2 cursor-pointer bg-blue-300 text-black hover:bg-gray-400 hover:text-white duration-300;
-    }
-
-    .modal-table-add-header-disabled {
-        @apply items-center font-semibold px-12 py-2 cursor-pointer bg-gray-400 text-white duration-300;
-    }
-
-    .modal-table-add-row {
-        @apply text-center bg-white;
-    }
-
-    .modal-table-add-row input {
-        @apply px-4 py-2.5 outline-none bg-transparent;
-    }
-
-    .modal-table-add-row-disabled {
-        @apply text-gray-400 bg-gray-200 duration-300;
-    }
-
-    .modal-table-add-row-enabled {
-        @apply hover:bg-blue-100 focus-within:bg-blue-100 duration-300;
-    }
-
-    .modal-component {
-        @apply flex justify-center px-5 pt-16 pb-8 space-y-10;
-    }
-
-    .modal-component-spacing {
-        @apply space-y-14;
-    }
-
-    .modal-component-header {
-        @apply flex justify-center scale-[250%];
-    }
-
-    .modal-status-success {
-        @apply text-green-500;
-    }
-
-    .modal-status-failed {
-        @apply text-red-500;
-    }
-
-    .modal-component-message {
-        @apply text-center w-[25rem] space-y-1;
-    }
-
-    .modal-message-success {
-        @apply font-semibold text-2xl text-green-800;
-    }
-
-    .modal-message-status {
-        @apply text-lg text-green-700;
-    }
-
-    .modal-message-failed {
-        @apply text-lg text-red-700;
-    }
-
-    .modal-component-loading {
-        @apply scale-[150%];
-    }
-
-    .modal-loading-message {
-        @apply text-2xl;
-    }
-
-    .modal-loading-submsg {
-        @apply text-lg text-gray-600;
-    }
-
-    .dashboard {
-        @apply ml-12;
-    }
-
-    .dashboard-header {
-        @apply text-2xl mb-6;
-    }
-
-    .dashboard-header h1 {
-        @apply text-white;
-    }
-
-    .dashboard-content {
-        @apply flex space-x-10;
-    }
-
-    .backend-tables {
-        @apply space-y-16 md:w-3/6;
-    }
-
-    .dashboard-table-header h1 {
-        @apply text-white text-xl uppercase bg-blue-500 px-4 py-2.5;
-    }
-
-    .dashboard-table-contents {
-        @apply text-lg;
-    }
-
-    .dashboard-table {
-        @apply flex justify-between font-bold text-blue-400 border-b border-gray-400 px-4 py-4 hover:bg-white hover:bg-opacity-[3%];
-    }
-
-    .dashboard-table a {
-        @apply text-blue-300 cursor-pointer;
-    }
-
-    .dashboard-table-options {
-        @apply flex mr-12 space-x-8;
-    }
-
-    .dashboard-table-view {
-        @apply flex items-center font-semibold space-x-2 hover:text-gray-200 duration-300;
-    }
-
-    .dashboard-table-view figure {
-        @apply text-white;
-    }
-
-    .dashboard-table-delete {
-        @apply flex items-center font-semibold space-x-2 hover:text-red-200 duration-300;
-    }
-
-    .dashboard-table-delete figure {
-        @apply text-red-400;
-    }
+  #columns {
+    @apply top-1/4 rounded-md bg-gray-200 px-1 py-2 text-gray-700 duration-300 hover:bg-gray-300;
+  }
+
+  .loading {
+    @apply flex h-[50vh] justify-center;
+  }
+
+  .loading-header {
+    @apply mt-[25vh] space-y-16;
+  }
+
+  .loading-message {
+    @apply text-2xl text-gray-300;
+  }
+
+  .loading-error {
+    @apply space-y-2.5 text-center;
+  }
+
+  .loading-error-message {
+    @apply text-3xl text-red-400;
+  }
+
+  .loading-error-submsg {
+    @apply text-xl text-red-300;
+  }
+
+  .back {
+    @apply ml-12 flex;
+  }
+
+  .back-button {
+    @apply mb-6 flex cursor-pointer items-center space-x-0.5 text-gray-400 duration-300 hover:text-white;
+  }
+
+  .back-arrow {
+    @apply translate-y-0.5 text-xl;
+  }
+
+  .back-text {
+    @apply text-xl;
+  }
+
+  .table {
+    @apply flex justify-center !important;
+  }
+
+  .table-content {
+    @apply text-center;
+  }
+
+  .table-overview {
+    @apply mb-5;
+  }
+
+  .table-overview-header h1 {
+    @apply text-3xl font-bold text-white;
+  }
+
+  .table-overview-options {
+    @apply mt-5 flex items-center justify-center space-x-5;
+  }
+
+  .table-overview-button {
+    @apply rounded-md border-[2.5px] px-8 py-1.5 text-lg font-semibold uppercase duration-300;
+  }
+
+  .table-overview-inactive {
+    @apply border-gray-200 text-lg font-semibold text-gray-400 hover:border-gray-400;
+  }
+
+  .table-overview-add {
+    @apply rounded-md border-[2.5px] border-green-200 px-6 py-1.5 text-lg font-semibold uppercase text-green-400 duration-300 hover:border-green-400;
+  }
+
+  .table-overview-edit {
+    @apply border-blue-200 text-blue-400 hover:border-blue-400;
+  }
+
+  .table-overview-delete {
+    @apply border-red-200 text-red-400 hover:border-red-400;
+  }
+
+  .nav-content {
+    @apply ml-12 flex items-center space-x-3 text-gray-300;
+  }
+
+  .nav-title {
+    @apply text-2xl duration-300 hover:text-white;
+  }
+
+  .backend-status {
+    @apply flex items-center justify-center text-red-400;
+  }
+
+  .backend-status-loading {
+    @apply absolute scale-[-45%];
+  }
+
+  .backend-status-text-loading {
+    @apply cursor-default opacity-0;
+  }
+
+  .backend-status-online {
+    @apply text-green-400 duration-300;
+  }
+
+  .backend-status-offline {
+    @apply text-red-400 duration-300;
+  }
+
+  .view-table {
+    @apply border-separate shadow-lg;
+  }
+
+  .table-header {
+    @apply text-center uppercase;
+  }
+
+  .table-header th {
+    @apply bg-blue-300 px-12 py-2 font-semibold;
+  }
+
+  .table-row {
+    @apply cursor-pointer text-center duration-300 hover:bg-blue-100;
+  }
+
+  .table-row td {
+    @apply px-4 py-2.5;
+  }
+
+  .modal {
+    @apply absolute inset-0 flex justify-center bg-black bg-opacity-25;
+  }
+
+  .modal-ui {
+    @apply mt-12 rounded-md bg-gray-300;
+    scrollbar-width: none;
+  }
+
+  .modal-section {
+    @apply max-h-[40rem] overflow-auto scroll-smooth pl-5 pt-3 pb-3;
+  }
+
+  .modal-header {
+    @apply flex items-center justify-between;
+  }
+
+  .modal-header h1 {
+    @apply pr-32 text-xl;
+  }
+
+  .modal-header-delete {
+    @apply text-2xl font-bold text-red-600;
+  }
+
+  .modal-header-add {
+    @apply text-2xl font-bold text-green-600;
+  }
+
+  .modal-close {
+    @apply mr-5 translate-y-0.5;
+  }
+
+  .modal-close button {
+    @apply text-2xl text-gray-400 duration-300 hover:text-gray-500;
+  }
+
+  .modal-description {
+    @apply mt-4 mb-2.5 mr-5 flex items-center space-x-2 rounded-md bg-gray-100 py-2 pl-2 pr-2;
+  }
+
+  .modal-description figure {
+    @apply text-2xl text-gray-600;
+  }
+
+  .modal-description h3 {
+    @apply w-[90%] text-gray-600;
+  }
+
+  .modal-table-columns {
+    @apply mt-4 mb-2.5 mr-5 flex items-center justify-center space-x-5;
+  }
+
+  .modal-table-columns table {
+    @apply border-separate;
+  }
+
+  .modal-table-header {
+    @apply items-center text-center uppercase;
+  }
+
+  .modal-table-header th {
+    @apply items-center bg-blue-300 px-12 py-2 font-semibold 
+        text-black;
+  }
+
+  .modal-table-header-disabled {
+  }
+
+  .modal-table-row {
+    @apply bg-white text-center;
+  }
+
+  .modal-table-row td {
+    @apply duration-300 focus-within:bg-blue-100 hover:bg-blue-100;
+  }
+
+  .modal-table-row input {
+    @apply bg-transparent px-4 py-2.5 outline-none;
+  }
+
+  .modal-buttons {
+    @apply mt-6 flex items-center space-x-3;
+  }
+
+  .modal-button-add {
+    @apply cursor-pointer rounded-md bg-green-400 px-3 py-1 shadow-lg duration-300 hover:bg-green-500;
+  }
+
+  .modal-button-add button {
+    @apply text-lg font-semibold text-white;
+  }
+
+  .modal-button-row {
+    @apply cursor-pointer rounded-md bg-blue-400 px-3 py-1 shadow-lg duration-300 hover:bg-blue-500;
+  }
+
+  .modal-button-row button {
+    @apply text-lg font-semibold text-white;
+  }
+
+  .modal-button-edit {
+    @apply cursor-pointer rounded-md bg-blue-400 px-3 py-1 shadow-lg duration-300 hover:bg-blue-500;
+  }
+
+  .modal-button-edit button {
+    @apply text-lg font-semibold text-white;
+  }
+
+  .modal-ui-table {
+    @apply mt-12 rounded-md bg-gray-300 pl-5 pt-3 pb-5;
+  }
+
+  .modal-description-warning {
+    @apply mt-4 mb-2.5 mr-5 flex items-center space-x-2 rounded-md bg-red-100 py-2 pl-2 pr-2;
+  }
+
+  .modal-description-warning figure {
+    @apply text-2xl text-red-600;
+  }
+
+  .modal-description-warning h3 {
+    @apply w-[90%] text-red-600;
+  }
+
+  .modal-button-delete {
+    @apply cursor-pointer rounded-md border-2 border-red-300 px-3 py-0.5 duration-300 hover:border-red-400;
+  }
+
+  .modal-button-delete button {
+    @apply text-lg font-semibold text-red-600;
+  }
+
+  .modal-button-cancel {
+    @apply cursor-pointer rounded-md border-2 border-gray-400 bg-gray-400 px-5 py-0.5 duration-300 hover:border-gray-500 hover:bg-gray-500;
+  }
+
+  .modal-button-cancel button {
+    @apply text-lg font-semibold text-white;
+  }
+
+  .modal-table-add-header {
+    @apply items-center text-center uppercase;
+  }
+
+  .modal-table-add-header-enabled {
+    @apply cursor-pointer items-center bg-blue-300 px-12 py-2 font-semibold text-black duration-300 hover:bg-gray-400 hover:text-white;
+  }
+
+  .modal-table-add-header-disabled {
+    @apply cursor-pointer items-center bg-gray-400 px-12 py-2 font-semibold text-white duration-300;
+  }
+
+  .modal-table-add-row {
+    @apply bg-white text-center;
+  }
+
+  .modal-table-add-row input {
+    @apply bg-transparent px-4 py-2.5 outline-none;
+  }
+
+  .modal-table-add-row-disabled {
+    @apply bg-gray-200 text-gray-400 duration-300;
+  }
+
+  .modal-table-add-row-enabled {
+    @apply duration-300 focus-within:bg-blue-100 hover:bg-blue-100;
+  }
+
+  .modal-component {
+    @apply flex justify-center space-y-10 px-5 pt-16 pb-8;
+  }
+
+  .modal-component-spacing {
+    @apply space-y-14;
+  }
+
+  .modal-component-header {
+    @apply flex scale-[250%] justify-center;
+  }
+
+  .modal-status-success {
+    @apply text-green-500;
+  }
+
+  .modal-status-failed {
+    @apply text-red-500;
+  }
+
+  .modal-component-message {
+    @apply w-[25rem] space-y-1 text-center;
+  }
+
+  .modal-message-success {
+    @apply text-2xl font-semibold text-green-800;
+  }
+
+  .modal-message-status {
+    @apply text-lg text-green-700;
+  }
+
+  .modal-message-failed {
+    @apply text-lg text-red-700;
+  }
+
+  .modal-component-loading {
+    @apply scale-[150%];
+  }
+
+  .modal-loading-message {
+    @apply text-2xl;
+  }
+
+  .modal-loading-submsg {
+    @apply text-lg text-gray-600;
+  }
+
+  .dashboard {
+    @apply ml-12;
+  }
+
+  .dashboard-header {
+    @apply mb-6 text-2xl;
+  }
+
+  .dashboard-header h1 {
+    @apply text-white;
+  }
+
+  .dashboard-content {
+    @apply flex space-x-10;
+  }
+
+  .backend-tables {
+    @apply space-y-16 md:w-3/6;
+  }
+
+  .dashboard-table-header h1 {
+    @apply bg-blue-500 px-4 py-2.5 text-xl uppercase text-white;
+  }
+
+  .dashboard-table-contents {
+    @apply text-lg;
+  }
+
+  .dashboard-table {
+    @apply flex justify-between border-b border-gray-400 px-4 py-4 font-bold text-blue-400 hover:bg-white hover:bg-opacity-[3%];
+  }
+
+  .dashboard-table a {
+    @apply cursor-pointer text-blue-300;
+  }
+
+  .dashboard-table-options {
+    @apply mr-12 flex space-x-8;
+  }
+
+  .dashboard-table-view {
+    @apply flex items-center space-x-2 font-semibold duration-300 hover:text-gray-200;
+  }
+
+  .dashboard-table-view figure {
+    @apply text-white;
+  }
+
+  .dashboard-table-delete {
+    @apply flex items-center space-x-2 font-semibold duration-300 hover:text-red-200;
+  }
+
+  .dashboard-table-delete figure {
+    @apply text-red-400;
+  }
 }
