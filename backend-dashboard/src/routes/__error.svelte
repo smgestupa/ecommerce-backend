@@ -30,7 +30,7 @@ in:fade={ { duration: 300 } }>
 
         <!-- Loading messages -->
         <div class="loading-error">
-            <h3 class="loading-error-message">This page does not exist; go back to the dashboard</h3>
+            <h3 class="loading-error-message">This page does not exist, go back to the dashboard</h3>
         </div>
     </header>
 </section>
