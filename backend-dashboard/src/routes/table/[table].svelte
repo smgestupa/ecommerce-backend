@@ -16,6 +16,7 @@
     import ConfirmDeleteRow from "../../components/modal/ConfirmDeleteRow.svelte";
     import EditRow from "../../components/modal/EditRow.svelte";
     import Loading from "../../svg_animated/Loading.svelte";
+    import Warning from "$icons/svg/Warning.svelte";
     export let tableName;
     let tableHeaders = [];
     let tableRows = {};
@@ -210,12 +211,14 @@ in:fade={ { duration: 300 } }>
     <section class="loading">
         <header class="loading-header">
             <!-- Loading animated SVG component -->
-            <Loading />
+            <figure class="flex justify-center">
+                <Warning class={ "text-center scale-[7.5] m-auto fill-yellow-400" }/>
+            </figure>
 
             <!-- Loading messages -->
             <div class="loading-error">
                 <h3 class="loading-error-message">{ err.message }</h3>
-                <h3 class="loading-error-submsg">Most likely this table has no existing rows, you should check this in your database</h3>
+                <h3 class="loading-error-submsg">Please check if this table exists, or rows exist in this table; ideally check your database</h3>
             </div>
         </header>
     </section>
