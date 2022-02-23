@@ -1,11 +1,11 @@
 <script>
     /**
-     *  Imports
+    *  Imports
     */
     import { Trash, Eye } from "$icons/svg.js";
 
     /**
-     *  Variables 
+    *  Variables 
     */
 
     export let tables, openConfirmDeleteTableModal; // Prop variable(s)

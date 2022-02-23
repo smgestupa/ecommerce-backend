@@ -1,7 +1,7 @@
 <script>
     /**
-     *  Variables
-     */
+    *  Variables
+    */
 
     export let page, lastPage; // Prop variable(s)
     export let switchPageRow; // Prop function(s)

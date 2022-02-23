@@ -1,6 +1,6 @@
 <script>
     /**
-     *  Imports
+    *  Imports
     */
 
     import { fly, fade } from 'svelte/transition';
@@ -12,7 +12,7 @@
 
 
     /**
-     *  Variables 
+    *  Variables 
     */
 
     export let tableName, tableHeaders, tableRefresh; // Prop variable(s)
@@ -21,6 +21,11 @@
     let disabledColumns = [];
     let numberOfRows = 0;
     let modalLoading = false, statusCode;
+
+    
+    /**
+    *   Functions 
+    */
 
     const addToTable = async () => {
         modalLoading = true;

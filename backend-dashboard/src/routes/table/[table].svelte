@@ -13,7 +13,7 @@
 
 <script>
     /**
-     *  Imports
+    *  Imports
     */
 
     import { fade } from "svelte/transition";
@@ -28,8 +28,8 @@
 
 
     /**
-     *  Variables
-     */
+    *  Variables
+    */
 
     export let tableName; // Prop variable(s)
     tableName = tableName.charAt( 0 ).toUpperCase() + tableName.substring( 1 ); // Uppercase first letter only
@@ -44,8 +44,8 @@
 
 
     /**
-     *  Methods
-     */
+    *  Functions
+    */
 
     const changeRowIndex = ( index ) => {
         rowIndex = index + 1;

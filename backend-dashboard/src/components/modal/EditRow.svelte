@@ -1,6 +1,6 @@
 <script>
     /**
-     *  Imports 
+    *  Imports 
     */
 
     import { fly, fade } from 'svelte/transition';
@@ -11,7 +11,7 @@
 
 
     /**
-     *  Variables
+    *  Variables
     */
 
     export let tableName, tableHeaders, selectedTableData; // Prop variable(s)
@@ -23,7 +23,7 @@
 
 
     /**
-    *   Methods
+    *   Functions
     */
 
     const closeModal = () => $showEditRowModal = false;

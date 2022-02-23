@@ -1,6 +1,6 @@
 <script>
     /**
-     *  Imports
+    *  Imports
     */
 
     import { fade } from 'svelte/transition';
@@ -8,9 +8,9 @@
 
 
     /**
-     *  Variables 
+    *  Variables 
     */
-   
+
     export let statusCode = 400, statusMessage; // Prop variable(s)
     const success = statusCode === 200;
 </script>

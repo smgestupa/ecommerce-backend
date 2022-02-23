@@ -1,6 +1,6 @@
 <script>
     /**
-     *  Imports
+    *  Imports
     */
 
     import { fly, fade } from 'svelte/transition';
@@ -10,12 +10,17 @@
     import ModalStatus from "$components/modal/components/ModalStatus.svelte";
 
     /**
-     *  Variables 
+    *  Variables 
     */
 
     export let tableName, rowData, tableRefresh; // Prop variable(s)
     const statusMessage = "You have successfully delete the table " + tableName + ".";
     let modalLoading = false, statusCode;
+
+    
+    /**
+    *   Functions 
+    */
 
     const closeModal = () => {
         $showConfirmDeleteRowModal = false;

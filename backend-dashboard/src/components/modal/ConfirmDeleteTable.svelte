@@ -1,6 +1,6 @@
 <script>
     /**
-     *  Imports
+    *  Imports
     */
 
     import { fly, fade } from 'svelte/transition';
@@ -9,14 +9,14 @@
 
 
     /**
-     *  Variables
+    *  Variables
     */
 
     export let tableName; // Prop variable(s)
 
 
     /**
-     *  Methods
+    *  Functions
     */
 
     const closeModal = () =>{

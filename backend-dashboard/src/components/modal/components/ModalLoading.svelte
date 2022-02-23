@@ -1,8 +1,8 @@
 <script>
     /**
-     *  Imports
+    *  Imports
     */
-   
+
     import { fade } from 'svelte/transition';
     import { Loading } from "$icons/svg.js";
 </script>

@@ -1,14 +1,14 @@
 <script>
     /**
-     *  Imports
+    *  Imports
     */
 
     import { fade } from "svelte/transition";
 
 
     /**
-     *  Variables
-     */
+    *  Variables
+    */
 
     export let tableHeaders, tableRows, rowIndex; // Prop variable(s)
     export let changeRowIndex, setSelectedTableData; // Prop function(s)
