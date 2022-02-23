@@ -36,8 +36,7 @@
 
     let tableRows = {};
     let tableHeaders = []; // Table columns
-    // TODO: change [rowIndex] default value to [undefined]
-    let rowIndex = -1; // Will be used to manipulate a specific table row
+    let rowIndex = undefined; // Will be used to manipulate a specific table row
     let rowData = {}; // Row data that is/are deleted/added, to be sent to the database
     let selectedTableData = {}; // Data from the selected row
     let pageNumber = 0; // Current page number
@@ -56,12 +55,12 @@
     const openAddRowModal = () => $showAddRowModal = true;
 
     const openConfirmDeleteRowModal = () => {
-        if ( rowIndex === -1 ) return;
+        if ( rowIndex === undefined ) return;
         $showConfirmDeleteRowModal = true;
     }
 
     const openEditRowModal = () => {
-        if ( rowIndex === -1 ) return;
+        if ( rowIndex === undefined ) return;
         $showEditRowModal = true;
     }
 
@@ -73,7 +72,7 @@
         try {
             // Check if table rows is empty, then get table rows
             // TODO: rename [getTables()] -> [getRows()]
-            if ( Object.keys( tableRows ).length === 0 ) await getTables();
+            if ( Object.keys( tableRows ).length === 0 ) await getRows();
             // Check if table headers are empty, then fill up with table columns
             if ( tableHeaders.length === 0 ) getHeaders();
         } catch ( err ) {
@@ -88,7 +87,7 @@
         }
     }
 
-    const getTables = async () => {
+    const getRows = async () => {
         const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }`, {
                 method: 'GET',
                 headers: {
@@ -131,7 +130,7 @@
         else lastPage = false; // else, it's not the last page
 
         pageNumber = page; // Switch page
-        rowIndex = -1; // Change back to the default value of [rowIndex]
+        rowIndex = undefined; // Change back to the default value of [rowIndex]
         tableRefresh();
     }
 </script>
@@ -205,7 +204,7 @@ in:fade={ { duration: 300 } }>
 
                     <!-- Edit button -->
                     <button class="table-overview-button
-                    { rowIndex === -1 ?
+                    { rowIndex === undefined ?
                     'table-overview-inactive' :
                     'table-overview-edit' }"
                     on:click={ () => openEditRowModal() }>
@@ -214,7 +213,7 @@ in:fade={ { duration: 300 } }>
 
                     <!-- Delete row button -->
                     <button class="table-overview-button
-                    { rowIndex === -1 ? 
+                    { rowIndex === undefined ? 
                     'table-overview-inactive' :
                     'table-overview-delete' } 
                     px-6"
