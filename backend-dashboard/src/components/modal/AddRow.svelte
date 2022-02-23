@@ -1,27 +1,40 @@
 <script>
+    /**
+     *  Imports
+    */
+
     import { fly, fade } from 'svelte/transition';
     import { onMount } from 'svelte';
     import { showAddRowModal } from "$stores/stores.js";
     import { X, Info } from "$icons/svg.js";
     import ModalLoading from "$components/modal/components/ModalLoading.svelte";
     import ModalStatus from "$components/modal/components/ModalStatus.svelte";
-    export let tableName, tableHeaders, tableRefresh;
+
+
+    /**
+     *  Variables 
+    */
+
+    export let tableName, tableHeaders, tableRefresh; // Prop variable(s)
     const statusMessage = "You have successfully added row(s) to the database.";
-    let rows = {};
+    let rows = {}; // List of rows that is expected to be added
     let disabledColumns = [];
     let numberOfRows = 0;
     let modalLoading = false, statusCode;
 
     const addToTable = async () => {
         modalLoading = true;
-
-        let columns = tableHeaders.filter( col => !disabledColumns.includes( col ) );
-        columns = new Map().set( "columns", columns );
-        const rows = saveAddedRows();
         
-        const requestBody = new Set();
-        requestBody.add( Object.fromEntries( columns ) );
-        requestBody.add( [ ...rows ] );
+        // Create a variable, that will filter
+        // disabled columns
+        let columns = tableHeaders.filter( col => !disabledColumns.includes( col ) );
+        // Re-assign as a new Map object, and pass the old [columns] as the value
+        columns = new Map().set( "columns", columns );
+        const rows = saveAddedRows(); // Get all existing (new) rows
+        
+        const requestBody = new Set(); // Will be used to pass as the body
+        // Append data to the Set object, through chaining
+        requestBody.add( Object.fromEntries( columns ) ).add( [ ...rows ] );
         
         try {
             const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName }`, {
@@ -48,26 +61,31 @@
     const initializeRow = () => numberOfRows++;
 
     const disableColumn = ( headerName ) => {
-        if ( disabledColumns.includes( headerName ) ) {
-            disabledColumns = disabledColumns.filter( column => column !== headerName );
+        if ( disabledColumns.includes( headerName ) ) { // Check if the column is already disabled
+            disabledColumns = disabledColumns.filter( column => column !== headerName ); // If it is, then re-enable it
             return;
         }
 
+        // If not already disabled, then
+        // disable the selected column
         disabledColumns = disabledColumns.concat( headerName );
     }
 
     const saveAddedRows = () => {
-        const rowsToJSON = new Set();
+        const rowsToJSON = new Set(); // Will be used to convert (new) rows into JSON format
 
-        for ( let i = 0; i < numberOfRows; i++ ) {
+        for ( let i = 0; i < numberOfRows; i++ ) { // Loop for each row
             const row = new Map();
 
+            // Loop to get the column and value
+            // under it, as the key-value pair
             for ( let r = 0; r < tableHeaders.length; r++ ) {
+                // If the specific column is disabled, skip
                 if ( disabledColumns.includes( tableHeaders[ r ] ) ) continue;
                 row.set( tableHeaders[ r ], rows[ tableHeaders[ r ] + "." + i ] || "" );
             }
 
-            rowsToJSON.add( Object.fromEntries( row ) );
+            rowsToJSON.add( Object.fromEntries( row ) ); // Pass the key-value pair of the row
         }
 
         return rowsToJSON;

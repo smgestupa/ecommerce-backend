@@ -1,11 +1,16 @@
 <script>
-    export let page, lastPage; // Prop variables
-    export let switchPageRow; // Prop functions
+    /**
+     *  Variables
+     */
+
+    export let page, lastPage; // Prop variable(s)
+    export let switchPageRow; // Prop function(s)
 </script>
 
 <!-- Pages list -->
 <section class="page-section">
     <div class="pages">
+        <!-- Previous page button -->
         <button class="page-button"
         class:page-button-disabled={ page === 0 }
         on:click={ switchPageRow( page, true ) }
@@ -17,6 +22,7 @@
             { page + 1 }
         </div>
         
+        <!-- Next page button -->
         <button class="page-button"
         class:page-button-disabled={ lastPage }
         on:click={ switchPageRow( page, false ) }

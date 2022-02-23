@@ -1,7 +1,17 @@
 <script>
+    /**
+     *  Imports
+    */
+
     import { Search } from '$icons/svg.js'
-    export let columns; // Prop variables
-    export let searchRow; // Prop functions
+    
+
+    /**
+     *  Variables
+     */
+
+    export let columns; // Prop variable(s)
+    export let searchRow; // Prop function(s)
     let specifiedColumn, searchValue;
 </script>
 

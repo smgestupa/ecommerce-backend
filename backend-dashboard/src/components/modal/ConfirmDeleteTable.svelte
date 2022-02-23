@@ -1,8 +1,23 @@
 <script>
+    /**
+     *  Imports
+    */
+
     import { fly, fade } from 'svelte/transition';
     import { dashboardRefresh, showConfirmDeleteTableModal } from "$stores/stores.js";
     import { X, Warning } from "$icons/svg.js";
-    export let tableName;
+
+
+    /**
+     *  Variables
+    */
+
+    export let tableName; // Prop variable(s)
+
+
+    /**
+     *  Methods
+    */
 
     const closeModal = () =>{
         $showConfirmDeleteTableModal = false;
@@ -12,7 +27,9 @@
         $dashboardRefresh = true;
 
         try {
-            const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }`, {
+            // Pass the table name that needs
+            // to be deleted
+            await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }`, {
                 method: 'DELETE',
             } );
         } catch ( err ) {

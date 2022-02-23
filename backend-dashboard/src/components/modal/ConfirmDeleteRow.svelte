@@ -1,10 +1,19 @@
 <script>
+    /**
+     *  Imports
+    */
+
     import { fly, fade } from 'svelte/transition';
     import { showConfirmDeleteRowModal } from "$stores/stores.js";
     import { X, Warning } from "$icons/svg.js";
     import ModalLoading from "$components/modal/components/ModalLoading.svelte";
     import ModalStatus from "$components/modal/components/ModalStatus.svelte";
-    export let tableName, rowData, tableRefresh;
+
+    /**
+     *  Variables 
+    */
+
+    export let tableName, rowData, tableRefresh; // Prop variable(s)
     const statusMessage = "You have successfully delete the table " + tableName + ".";
     let modalLoading = false, statusCode;
 
@@ -16,6 +25,8 @@
         modalLoading = true;
 
         try {
+            // Pass the data of the selected row
+            // as the body
             const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName.toLowerCase() }`, {
                 method: 'DELETE',
                 headers: {

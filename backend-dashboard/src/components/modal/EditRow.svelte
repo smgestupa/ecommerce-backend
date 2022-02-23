@@ -1,17 +1,21 @@
 <script>
+    /**
+     *  Imports 
+    */
+
     import { fly, fade } from 'svelte/transition';
     import { showEditRowModal } from "$stores/stores.js";
     import { X, Info } from "$icons/svg.js";
     import ModalLoading from "$components/modal/components/ModalLoading.svelte";
     import ModalStatus from "$components/modal/components/ModalStatus.svelte";
-    export let tableName, tableHeaders, selectedTableData; // Prop variables
-    export let tableRefresh; // Prop functions
 
-    
+
     /**
-    *   Component-specific Variables
+     *  Variables
     */
 
+    export let tableName, tableHeaders, selectedTableData; // Prop variable(s)
+    export let tableRefresh; // Prop function(s)
     const selectedColumnsData = Object.entries( selectedTableData[ 1 ] );
     const newColumnsData = Object.entries( selectedTableData[ 1 ] );
     const statusMessage = "You have successfully edited the selected row.";
@@ -19,17 +23,19 @@
 
 
     /**
-    *   Functions
+    *   Methods
     */
 
     const closeModal = () => $showEditRowModal = false;
 
     const editRow = async () => {
         modalLoading = true;
+    
+        const selectedForJSON = Object.fromEntries( new Map( selectedColumnsData ) ); // Data from the selected row
+        const newForJSON = Object.fromEntries( new Map( newColumnsData ) ); // New data for the selected row,
 
-        const selectedForJSON = Object.fromEntries( new Map( selectedColumnsData ) );
-        const newForJSON = Object.fromEntries( new Map( newColumnsData ) );
-
+        // Pass the current data and new data into
+        // a JSON object variable
         const responseBody = JSON.stringify( [ selectedForJSON, newForJSON ] );
         try {
             const req = await fetch( `http://localhost:8093/api/v1/tables/${ tableName }`, {

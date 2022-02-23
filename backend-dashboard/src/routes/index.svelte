@@ -1,13 +1,19 @@
 <script>
+    // Imports
     import { fade } from "svelte/transition";
     import { dashboardRefresh, showConfirmDeleteTableModal } from "$stores/stores.js";
     import { Loading, Warning } from "$icons/svg.js";
     import Dashboard from "$components/index/Dashboard.svelte";
     import ConfirmDeleteTable from "$components/modal/ConfirmDeleteTable.svelte";
+
+    // Variables
     let tables = [], selectedTable = "";
 
+    // This will fetch all available tables
+    // from the specified database
     const fetchTables = async () => {
         try {
+            // Fetch table rows in JSON format
             const req = await fetch( 'http://localhost:8093/api/v1/tables', {
             method: 'GET',
             headers: {
@@ -16,17 +22,21 @@
         } );
         const res = await req.json();
         
+        // Separate admin tables from catalog tables
         const authTables = res.filter( table => table.description === "authorization/authentication" );
         const catalogTables = res.filter( table => table.description === "catalog" );
-        tables = [ authTables, catalogTables ];
+
+        tables = [ authTables, catalogTables ]; // Pass the two separate tables into the [tables] array
         } catch ( err ) {
+            // Throw error if catch-block is executed
             throw new Error( 'It seems like the backend server isn\'t responding, try refreshing this page' );
         }
     }
 
+    // This will be used to open the modal for deleting tables
     const openConfirmDeleteTableModal = ( tableName ) => {
-        selectedTable = tableName;
-        $showConfirmDeleteTableModal = true;
+        selectedTable = tableName; // Pass in the name of the selected table
+        $showConfirmDeleteTableModal = true; // Show the modal
     }
 </script>
 

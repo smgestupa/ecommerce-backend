@@ -1,4 +1,7 @@
 <script context="module">
+    // Get this page name, which will be used
+    // for getting all available rows from the
+    // table with the same name
     export const load = async ( { page } ) => {
         return { 
             props: { 
@@ -9,7 +12,10 @@
 </script>
 
 <script>
-    // Imports
+    /**
+     *  Imports
+    */
+
     import { fade } from "svelte/transition";
     import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "$stores/stores.js";
     import { Loading, Warning, LeftArrow } from "$icons/svg.js";
@@ -20,15 +26,27 @@
     import ConfirmDeleteRow from "$components/modal/ConfirmDeleteRow.svelte";
     import EditRow from "$components/modal/EditRow.svelte";
 
-    // Variables
-    let tableName = $$props.tableName.charAt( 0 ).toUpperCase() + $$props.tableName.substring( 1 );
+
+    /**
+     *  Variables
+     */
+
+    export let tableName; // Prop variable(s)
+    tableName = tableName.charAt( 0 ).toUpperCase() + tableName.substring( 1 ); // Uppercase first letter only
+
     let tableRows = {};
-    let tableHeaders = [];
-    let rowIndex = -1;
-    let rowData = {};
-    let selectedTableData = {};
-    let pageNumber = 0;
-    let lastPage = false;
+    let tableHeaders = []; // Table columns
+    // TODO: change [rowIndex] default value to [undefined]
+    let rowIndex = -1; // Will be used to manipulate a specific table row
+    let rowData = {}; // Row data that is/are deleted/added, to be sent to the database
+    let selectedTableData = {}; // Data from the selected row
+    let pageNumber = 0; // Current page number
+    let lastPage = false; // Check if last page
+
+
+    /**
+     *  Methods
+     */
 
     const changeRowIndex = ( index ) => {
         rowIndex = index + 1;
@@ -50,10 +68,13 @@
     const setSelectedTableData = ( rowIndex ) => selectedTableData = Object.entries( tableRows )[ rowIndex ];
 
     const tableRefresh = async () => {
-        tableRows = {};
-        
+        tableRows = {}; // Clear the existing table rows
+
         try {
+            // Check if table rows is empty, then get table rows
+            // TODO: rename [getTables()] -> [getRows()]
             if ( Object.keys( tableRows ).length === 0 ) await getTables();
+            // Check if table headers are empty, then fill up with table columns
             if ( tableHeaders.length === 0 ) getHeaders();
         } catch ( err ) {
             throw new Error( `Something went wrong with getting the contents of this table: ${ tableName }` );
@@ -61,6 +82,7 @@
     }
 
     const getHeaders = () => {
+        // Loop to get table columns
         for ( const header of Object.keys( tableRows[0] ) ) {
             tableHeaders.push( header );
         }
@@ -75,6 +97,9 @@
             } );
 
         tableRows = await req.json();
+
+        // Check if returned JSON data is less than
+        // 10, then that means it's the last page
         if ( Object.keys( tableRows ).length < 10 ) lastPage = true;
     }
 
@@ -99,12 +124,14 @@
             } );
         
         tableRows = await req.json();
+
+        // Check if returned JSON data is less than
+        // 10, then that means it's the last page
         if ( Object.keys( tableRows ).length < 10 ) lastPage = true;
-        else lastPage = false;
+        else lastPage = false; // else, it's not the last page
 
-        pageNumber = page;
-        rowIndex = -1;
-
+        pageNumber = page; // Switch page
+        rowIndex = -1; // Change back to the default value of [rowIndex]
         tableRefresh();
     }
 </script>

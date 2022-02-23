@@ -1,7 +1,17 @@
 <script>
+    /**
+     *  Imports
+    */
+
     import { fade } from 'svelte/transition';
     import { CircularCheck, CircularCross } from "$icons/svg.js";
-    export let statusCode = 400, statusMessage;
+
+
+    /**
+     *  Variables 
+    */
+   
+    export let statusCode = 400, statusMessage; // Prop variable(s)
     const success = statusCode === 200;
 </script>
 
