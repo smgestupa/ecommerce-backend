@@ -5,6 +5,10 @@
     import Warning from '$icons/svg/Warning.svelte';
 </script>
 
+<svelte:head>
+    <title>Error!</title>
+</svelte:head>
+
 <section class="back" 
 in:fade={ { duration: 300 } }>
     <!-- Back button -->
