@@ -9,6 +9,7 @@
 </script>
 
 <script>
+    // Imports
     import { fade } from "svelte/transition";
     import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "$stores/stores.js";
     import { Loading, Warning, LeftArrow } from "$icons/svg.js";
@@ -18,16 +19,16 @@
     import AddRow from "$components/modal/AddRow.svelte";
     import ConfirmDeleteRow from "$components/modal/ConfirmDeleteRow.svelte";
     import EditRow from "$components/modal/EditRow.svelte";
-    let tableName;
-    let tableHeaders = [];
+
+    // Variables
+    let tableName = $$props.tableName.charAt( 0 ).toUpperCase() + $$props.tableName.substring( 1 );
     let tableRows = {};
+    let tableHeaders = [];
     let rowIndex = -1;
     let rowData = {};
     let selectedTableData = {};
     let pageNumber = 0;
     let lastPage = false;
-
-    tableName = $$props.tableName.charAt( 0 ).toUpperCase() + $$props.tableName.substring( 1 );
 
     const changeRowIndex = ( index ) => {
         rowIndex = index + 1;
@@ -49,6 +50,8 @@
     const setSelectedTableData = ( rowIndex ) => selectedTableData = Object.entries( tableRows )[ rowIndex ];
 
     const tableRefresh = async () => {
+        tableRows = {};
+        
         try {
             if ( Object.keys( tableRows ).length === 0 ) await getTables();
             if ( tableHeaders.length === 0 ) getHeaders();

@@ -8,7 +8,7 @@
     const statusMessage = "You have successfully delete the table " + tableName + ".";
     let modalLoading = false, statusCode;
 
-    const closeModal = () =>{
+    const closeModal = () => {
         $showConfirmDeleteRowModal = false;
     }
 
