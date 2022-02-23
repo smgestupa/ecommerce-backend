@@ -135,6 +135,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Table - { tableName }</title>
+</svelte:head>
+
 
 <section class="back" 
 in:fade={ { duration: 300 } }>

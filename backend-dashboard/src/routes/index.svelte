@@ -40,6 +40,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Dashboard</title>
+</svelte:head>
+
 { #await fetchTables() } 
     <section class="loading">
         <header class="loading-header">
