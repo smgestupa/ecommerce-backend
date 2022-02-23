@@ -1,6 +1,7 @@
 <script>
     import { fade } from "svelte/transition";
-    export let tableHeaders, tableRows, rowIndex, changeRowIndex, setSelectedTableData;
+    export let tableHeaders, tableRows, rowIndex; // Prop variables
+    export let changeRowIndex, setSelectedTableData; // Prop functions
 </script>
 
 <section in:fade={ { duration: 300 } }>

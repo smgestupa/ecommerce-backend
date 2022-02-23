@@ -1,14 +1,26 @@
 <script>
     import { fly, fade } from 'svelte/transition';
-    import { tableViewRefresh, showEditRowModal } from "$stores/stores.js";
+    import { showEditRowModal } from "$stores/stores.js";
     import { X, Info } from "$icons/svg.js";
     import ModalLoading from "$components/modal/components/ModalLoading.svelte";
     import ModalStatus from "$components/modal/components/ModalStatus.svelte";
-    export let tableName, tableHeaders, selectedTableData, rowIndex, tableRefresh;
+    export let tableName, tableHeaders, selectedTableData; // Prop variables
+    export let tableRefresh; // Prop functions
+
+    
+    /**
+    *   Component-specific Variables
+    */
+
     const selectedColumnsData = Object.entries( selectedTableData[ 1 ] );
     const newColumnsData = Object.entries( selectedTableData[ 1 ] );
-    const statusMessage = "You have successfully edited the selected row";
+    const statusMessage = "You have successfully edited the selected row.";
     let modalLoading = false, statusCode;
+
+
+    /**
+    *   Functions
+    */
 
     const closeModal = () => $showEditRowModal = false;
 
@@ -30,12 +42,12 @@
             const res = await req.status;
 
             statusCode = res;
+            tableRefresh();
         } catch ( err ) {
             console.error( err );
         }
 
         modalLoading = false;
-        tableRefresh();
         setTimeout( () => closeModal(), 1500 );
     }
 </script>

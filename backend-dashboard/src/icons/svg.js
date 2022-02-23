@@ -8,3 +8,4 @@ export { default as Info } from "./svg/Info.svelte";
 export { default as CircularCheck } from "./svg/CircularCheck.svelte";
 export { default as CircularCross } from "./svg/CircularCross.svelte";
 export { default as Search } from "./svg/Search.svelte";
+export { default as Loading } from "./svg/Loading.svelte";

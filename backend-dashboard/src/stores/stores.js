@@ -1,7 +1,6 @@
 import { writable } from "svelte/store";
 
 const dashboardRefresh = writable( false );
-const tableViewRefresh = writable( false );
 
 // AddRow modal variable(s)
 const showAddRowModal = writable( false );
@@ -17,7 +16,6 @@ const showEditRowModal = writable( false );
 
 export { 
         dashboardRefresh,
-        tableViewRefresh,
         showAddRowModal,
         showConfirmDeleteRowModal,
         showConfirmDeleteTableModal,

@@ -1,11 +1,11 @@
 <script>
     import { fly, fade } from 'svelte/transition';
-    import { tableViewRefresh, showConfirmDeleteRowModal } from "$stores/stores.js";
+    import { showConfirmDeleteRowModal } from "$stores/stores.js";
     import { X, Warning } from "$icons/svg.js";
     import ModalLoading from "$components/modal/components/ModalLoading.svelte";
     import ModalStatus from "$components/modal/components/ModalStatus.svelte";
-    export let tableName, rowIndex, rowData, tableRefresh;
-    const statusMessage = "You have successfully delete the table " + tableName;
+    export let tableName, rowData, tableRefresh;
+    const statusMessage = "You have successfully delete the table " + tableName + ".";
     let modalLoading = false, statusCode;
 
     const closeModal = () =>{
@@ -26,12 +26,12 @@
             const res = await req.status;
             
             statusCode = res;
+            tableRefresh();
         } catch ( err ) {
             console.error( err );
         }
 
         modalLoading = false;
-        tableRefresh();
         setTimeout( () => closeModal(), 1500 );
     };
 </script>

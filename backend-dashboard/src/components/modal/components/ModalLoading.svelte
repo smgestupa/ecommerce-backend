@@ -1,6 +1,6 @@
 <script>
     import { fade } from 'svelte/transition';
-    import Loading from "../../../svg_animated/Loading.svelte";
+    import { Loading } from "$icons/svg.js";
 </script>
 
 <section class="modal-component" in:fade={ { duration: 300 } }>

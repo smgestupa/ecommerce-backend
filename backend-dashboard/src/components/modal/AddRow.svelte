@@ -6,7 +6,7 @@
     import ModalLoading from "$components/modal/components/ModalLoading.svelte";
     import ModalStatus from "$components/modal/components/ModalStatus.svelte";
     export let tableName, tableHeaders, tableRefresh;
-    const statusMessage = "You have successfully added row(s) to the database";
+    const statusMessage = "You have successfully added row(s) to the database.";
     let rows = {};
     let disabledColumns = [];
     let numberOfRows = 0;
@@ -34,12 +34,12 @@
             const res = await req.status;
 
             statusCode = res;
+            tableRefresh();
         } catch ( err ) {
             console.error( err );
         }
 
         modalLoading = false;
-        tableRefresh();
         setTimeout( () => closeModal(), 1500 );
     }
 

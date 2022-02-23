@@ -384,7 +384,7 @@
   }
 
   .loading-icon {
-    @apply m-auto scale-[2.5];
+    @apply m-auto scale-[3.5];
   }
 
   .warning-icon {

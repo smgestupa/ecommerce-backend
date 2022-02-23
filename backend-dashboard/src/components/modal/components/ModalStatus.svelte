@@ -24,7 +24,7 @@
         <section class="modal-component-message">
             { #if success }
                 <h1 class="modal-message-success">Success!</h1>
-                <h3 class="modal-message-status">{ statusMessage }.</h3>
+                <h3 class="modal-message-status">{ statusMessage }</h3>
             { :else }
                 <h3 class="modal-message-failed">Something went wrong! Will be closing shortly.</h3>
             { /if }

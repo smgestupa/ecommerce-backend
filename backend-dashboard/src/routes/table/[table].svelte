@@ -1,23 +1,24 @@
 <script context="module">
     export const load = async ( { page } ) => {
-        return { props: { tableName: page.params.table } }
+        return { 
+            props: { 
+                tableName: page.params.table 
+            } 
+        };
     }
 </script>
 
 <script>
-    import { onMount } from "svelte";
     import { fade } from "svelte/transition";
-    import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "../../stores/stores.js";
-    import { LeftArrow } from "../../icons/svg.js";
-    import TableSearch from "../../components/table/TableSearch.svelte";
-    import ViewTable from "../../components/table/ViewTable.svelte";
-    import TablePage from "../../components/table/TablePage.svelte";
-    import AddRow from "../../components/modal/AddRow.svelte";
-    import ConfirmDeleteRow from "../../components/modal/ConfirmDeleteRow.svelte";
-    import EditRow from "../../components/modal/EditRow.svelte";
-    import Loading from "../../svg_animated/Loading.svelte";
-    import Warning from "$icons/svg/Warning.svelte";
-    export let tableName;
+    import { showAddRowModal, showConfirmDeleteRowModal, showEditRowModal } from "$stores/stores.js";
+    import { Loading, Warning, LeftArrow } from "$icons/svg.js";
+    import TableSearch from "$components/table/TableSearch.svelte";
+    import ViewTable from "$components/table/ViewTable.svelte";
+    import TablePage from "$components/table/TablePage.svelte";
+    import AddRow from "$components/modal/AddRow.svelte";
+    import ConfirmDeleteRow from "$components/modal/ConfirmDeleteRow.svelte";
+    import EditRow from "$components/modal/EditRow.svelte";
+    let tableName;
     let tableHeaders = [];
     let tableRows = {};
     let rowIndex = -1;
@@ -26,7 +27,7 @@
     let pageNumber = 0;
     let lastPage = false;
 
-    tableName = tableName.charAt( 0 ).toUpperCase() + tableName.substring( 1 );
+    tableName = $$props.tableName.charAt( 0 ).toUpperCase() + $$props.tableName.substring( 1 );
 
     const changeRowIndex = ( index ) => {
         rowIndex = index + 1;
@@ -50,14 +51,15 @@
     const tableRefresh = async () => {
         try {
             if ( Object.keys( tableRows ).length === 0 ) await getTables();
-            
-            tableHeaders = [];
-            for ( const header of Object.keys( tableRows[0] ) ) {
-                tableHeaders.push( header );
-            }
-            
+            if ( tableHeaders.length === 0 ) getHeaders();
         } catch ( err ) {
             throw new Error( `Something went wrong with getting the contents of this table: ${ tableName }` );
+        }
+    }
+
+    const getHeaders = () => {
+        for ( const header of Object.keys( tableRows[0] ) ) {
+            tableHeaders.push( header );
         }
     }
 
@@ -143,7 +145,6 @@ in:fade={ { duration: 300 } }>
 
     { #if $showConfirmDeleteRowModal }
         <ConfirmDeleteRow tableName={ tableName } 
-        rowIndex={ rowIndex }
         rowData={ rowData }
         tableRefresh={ tableRefresh }/>
     { /if }
@@ -151,7 +152,6 @@ in:fade={ { duration: 300 } }>
     { #if $showEditRowModal }
         <EditRow tableName={ tableName } 
         tableHeaders={ tableHeaders }
-        rowIndex={ rowIndex }
         selectedTableData={ selectedTableData }
         tableRefresh={ tableRefresh }/>
     { /if }

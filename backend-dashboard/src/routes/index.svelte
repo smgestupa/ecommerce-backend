@@ -1,8 +1,7 @@
 <script>
     import { fade } from "svelte/transition";
     import { dashboardRefresh, showConfirmDeleteTableModal } from "$stores/stores.js";
-    import Loading from "../svg_animated/Loading.svelte";
-    import { Warning } from "$icons/svg.js";
+    import { Loading, Warning } from "$icons/svg.js";
     import Dashboard from "$components/index/Dashboard.svelte";
     import ConfirmDeleteTable from "$components/modal/ConfirmDeleteTable.svelte";
     let tables = [], selectedTable = "";
