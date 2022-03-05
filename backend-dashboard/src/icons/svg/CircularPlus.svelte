@@ -1,1 +1,0 @@
-<svg width="1em" height="1em" aria-hidden="true" class={ $$props.class ?? "" } viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22zm1 15a1 1 0 1 1-2 0v-3H8a1 1 0 1 1 0-2h3V8a1 1 0 1 1 2 0v3h3a1 1 0 1 1 0 2h-3v3z" clip-rule="evenodd"/></svg>

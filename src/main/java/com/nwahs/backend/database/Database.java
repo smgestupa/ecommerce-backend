@@ -67,7 +67,7 @@ public class Database {
             // be executed later in your database
             // which will return the rows of the
             // specified table, if it exists
-            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + tableName + " LIMIT 10 OFFSET " + ( page * 10 ) + ";" );
+            final PreparedStatement statement = conn.prepareStatement( "SELECT * FROM " + tableName + " LIMIT 11 OFFSET " + ( page * 10 ) + ";" );
             final ResultSet res = statement.executeQuery();
             // Get the PreparedStatement's metadata
             // which will be used to get the

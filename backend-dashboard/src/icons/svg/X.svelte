@@ -1,1 +1,0 @@
-<svg width="1em" height="1em" aria-hidden="true" class={ $$props.class ?? "" } viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M15 15 9 9m6 0-6 6"/><circle cx="12" cy="12" r="10"/></g></svg>
