@@ -14,18 +14,19 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
-	// Allows your backend dashboard to do
-	// HTTP requests to your MySQL database;
-	// prevents CORS-related problems
+	/**
+	 * Allows your backend dashboard to do
+	 * HTTP requests to your MySQL database;
+	 * prevents CORS-related problems
+	 */
 	@Bean
 	public WebMvcConfigurer corsConfiguration() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings( CorsRegistry registry ) {
-				// Adds CORS mapping to every
-				// mapping in your backend,
-				// only allowing your backend
-				// dashboard address
+				// Add CORS mapping to every
+				// HTTP request; only allowing
+				// specific URL address
 				registry.addMapping( "/**" )
 						.allowedOrigins( Strings.svelteBackend );
 			}
