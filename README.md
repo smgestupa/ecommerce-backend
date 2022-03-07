@@ -1,7 +1,7 @@
 # E-Commerce Backend
 A Spring Boot backend server, equipped with a front-end dashboard. 
 
-This uses the Spring Boot framework, connecting the dashboard made in SvelteKit, to the MySQL database.
+This uses the Spring Boot framework, connecting the dashboard made using SvelteKit, to the MySQL database.
 
 # [Screenshots](/screenshots)
 
