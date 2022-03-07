@@ -1,100 +1,165 @@
 package com.nwahs.backend.controllers;
 
-import com.nwahs.backend.models.Table;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nwahs.backend.database.Database;
 import com.nwahs.backend.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.web.bind.annotation.*;
 
-import javax.sql.DataSource;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 @RestController
 @RequestMapping( Strings.apiPath )
-public class TableController {
+public class TableController extends Database {
 
-    // Will be used to connect to
-    // database, and you can
-    // execute statements with this
-    @Autowired
-    private DataSource dataSource;
-
-    // This will return all available
-    // tables in your database by
-    // accessing through "/tables/"
-    // e.g. http://localhost:8093/api/v1/tables/
-    @GetMapping( "/tables" )
-    public List< Table > getTables() throws Exception {
-        // This will open a connection and
-        // get the metadata from the database
-        // in order to get the table names
-        final DatabaseMetaData metaData = dataSource.getConnection().getMetaData();
-        final ResultSet tables = metaData.getTables( null, null, null, new String[] { "TABLE" } );
-
-        final List< Table > tablesList = new ArrayList<>();
-        while ( tables.next() ) {
-            final String tableName = tables.getString( "TABLE_NAME" );
-            final String tableDescription = tables.getString( "TABLE_COMMENT" );
-
-            tablesList.add( new Table( tableName, tableDescription ) );
-        }
-
-        return tablesList;
+    /**
+     * This will return all available
+     * tables in your database
+     * e.g. GET http://localhost:8093/api/v1/tables/
+     *
+     * @return A ResponseEntity with JSON body, or an error code 400 if something fails
+     */
+    @GetMapping( path = "/tables",
+                 produces = "application/json" )
+    public Object getTablesController() {
+        return getTables();
     }
 
-    // This will return the rows
-    // that exist from the provided
-    // {table} parameter
-    // e.g. http://localhost:8093/api/v1/tables/users
-    // will try to get the rows in the [users] table
-    @RequestMapping( "/tables/{table}" )
-    public HashMap< Integer, Object > getColumns( @PathVariable( "table" ) String table ) throws Exception {
-        // Prepare a query statement to
-        // be executed later in your database
-        // which will return the rows of the
-        // specified table, if it exists
-        final PreparedStatement statement = dataSource.getConnection().prepareStatement( "SELECT * FROM " + table );
-        final ResultSet res = statement.executeQuery();
-        // Get the PreparedStatement's metadata
-        // which will be used to get the
-        // column count, as well as the
-        // column names
-        final ResultSetMetaData metaData = res.getMetaData();
+    /**
+     * This will return only 11 rows
+     * that exist from the specific
+     * table
+     * e.g. GET http://localhost:8093/api/v1/tables/users
+     *
+     * @param tableName The table name
+     * @return A ResponseEntity with JSON body, or an error code 400 if something fails
+     */
+    @GetMapping( path = "/tables/{table}",
+            produces = "application/json" )
+    public Object getTableRowsController( @PathVariable( "table" ) String tableName ) {
+        return getTableRows( tableName, 0 );
+    }
 
-        // Initialize a LinkedHashMap, since
-        // HashMap messes up with the order
-        final HashMap< Integer, Object > tableRows = new LinkedHashMap<>();
+    /**
+     * This will return only 11 rows,
+     * starting from an offset, from
+     * the specific table
+     * e.g. GET http://localhost:8093/api/v1/tables/users/2
+     *
+     * @param tableName The table name
+     * @param page Table rows' starting offset
+     * @return A ResponseEntity with JSON body, or an error code 400 if something fails
+     */
+    @GetMapping( path = "/tables/{table}/{page}",
+                 produces = "application/json" )
+    public Object getTableRowsController( @PathVariable( "table" ) String tableName,
+                                          @PathVariable( "page" ) int page ) {
+        return getTableRows( tableName, page );
+    }
 
-        // This index will be used
-        // as a row's index when
-        // returning as JSON
-        int index = 0;
-        while ( res.next() ) { // Check if there are still rows to be returned
-            final HashMap< String, String > specificRow = new LinkedHashMap<>();
-            for ( int i = 1; i <= metaData.getColumnCount(); i++ ) {
-                // Put the column name from the
-                // position [i] as the key and the
-                // value under the said column as
-                // the value for the LinkedHashMap
-                specificRow.put( metaData.getColumnName( i ),
-                                 res.getString( i ) );
-            }
-            // Put the [specificRow] LinkedHashMap
-            // to the [tableRows] variable as the
-            // value and the current [index] as
-            // the key, then increment it
-            tableRows.put( index++, specificRow );
-        }
+    /**
+     * This will return specific rows
+     * based on a keyword
+     * e.g. GET http://localhost:8093/api/v1/tables/users/?column=[tableColumn]&search=[keyword]
+     *
+     * @param tableName The table name
+     * @param tableColumn Specific table column name
+     * @param keyword A string used as the basis for finding a specific result, using regexp
+     * @return A ResponseEntity with JSON body, or an error code 400 if something fails
+     */
+    @GetMapping( path = "/tables/{table}/",
+            produces = "application/json" )
+    public Object searchTableRowController( @PathVariable( "table" ) String tableName,
+                                            @RequestParam( "column" ) String tableColumn,
+                                            @RequestParam( "search" ) String keyword ) {
+        return searchTableRow( tableName, tableColumn, keyword );
+    }
 
-        return tableRows;
+    /**
+     * This will be used to add
+     * rows into a specific table,
+     * using the request body
+     * e.g. POST http://localhost:8093/api/v1/tables/users
+     *
+     * @param tableName The table name
+     * @param requestBody The response body received from communication to this endpoint
+     * @return A ResponseEntity with a code 200, or an error code 400 if something fails
+     * @throws JSONException Used to catch JSON-related errors
+     */
+    @PostMapping( path = "/tables/{table}",
+                  consumes = "application/json" )
+    @ResponseBody
+    public Object addTableRowsController( @PathVariable( "table" ) String tableName,
+                                          @RequestBody String requestBody ) throws JSONException {
+        final JSONArray body = new JSONArray( requestBody );
+
+        // Get the first value from the JSONArray,
+        // get the provided columns, convert to String
+        final String[] selectedColumns = body.getJSONObject( 0 ).get( "columns" )
+                                        // Convert to String, remove the brackets
+                                        // and double-quotes using regexp, and lastly,
+                                        // convert to a String array
+                                        .toString().replaceAll( "(\\[)|(])|(\")", "" ).split( "," );
+
+        return addTableRows( tableName, selectedColumns, body.getJSONArray( 1 ) );
+    }
+
+
+    /**
+     * This will be used to edit
+     * a row of a specific table,
+     * using the request body
+     * e.g. PUT http://localhost:8093/api/v1/tables/users
+     *
+     * @param tableName The table name
+     * @param requestBody The response body received from communication to this endpoint
+     * @throws JSONException Used to catch JSON-related errors
+     * @return A ResponseEntity with a code 200, or an error code 400 if something fails
+     * @throws JsonProcessingException Used to catch JSON-related errors for the jackson library
+     */
+    @CrossOrigin( Strings.svelteBackend ) // Explicitly required for PUT requests
+    @PutMapping( path = "/tables/{table}",
+                 consumes = "application/json" )
+    @ResponseBody
+    public Object editTableRowController( @PathVariable( "table" ) String tableName,
+                                        @RequestBody String requestBody ) throws JSONException, JsonProcessingException {
+        final JSONArray body = new JSONArray( requestBody );
+
+        // Using LinkedHashMap prevents using of default
+        // sorting, and we'll be using it to parse strings
+        // as key-value pairs
+        final LinkedHashMap<?, ?> newRow = new ObjectMapper().readValue( body.getString( 1 ), LinkedHashMap.class);
+        final LinkedHashMap<?, ?> oldRow = new ObjectMapper().readValue( body.getString( 0 ), LinkedHashMap.class);
+
+        return editTableRow( tableName, newRow, oldRow );
+    }
+
+    /**
+     * This will be used to delete a
+     * specific row of a specific table,
+     * or delete the table itself
+     * e.g. DELETE http://localhost:8093/api/v1/tables/users
+     *
+     * @param tableName The table name
+     * @param requestBody The response body received from communication to this endpoint
+     * @return A ResponseEntity with a code 200, or an error code 400 if something fails
+     */
+    @CrossOrigin( Strings.svelteBackend ) // Explicitly required for DELETE requests
+    @DeleteMapping( path = "/tables/{table}",
+                    consumes = "application/json" )
+    public Object deleteTableController( @PathVariable( "table" ) String tableName,
+                                         @RequestBody( required = false ) String requestBody ) {
+        // If the request body is empty,
+        // that means we want to delete
+        // the table
+        if ( requestBody == null ) return deleteTable( tableName );
+
+        // If the request body isn't empty,
+        // parse the request body as JSON,
+        // then pass the necessary values
+        return deleteTableRow( tableName, new GsonJsonParser().parseMap( requestBody ) );
     }
 }
