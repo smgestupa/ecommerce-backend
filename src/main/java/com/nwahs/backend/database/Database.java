@@ -88,6 +88,8 @@ public class Database {
                 tableRows.put( index++, thisRow ); // Add to the LinkedHashMap variable
             }
 
+            // Return code 302, when no rows exist
+            if ( tableRows.size() == 0 ) return new ResponseEntity<>( HttpStatus.FOUND );
             return new ResponseEntity<>( tableRows, HttpStatus.OK );
         } catch ( Exception err ) {
             System.err.println( err.getMessage() );
