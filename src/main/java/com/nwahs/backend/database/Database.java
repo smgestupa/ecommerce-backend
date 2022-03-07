@@ -212,18 +212,31 @@ public class Database {
             // old row and new row values
             final StringBuilder sqlStatement = new StringBuilder( "UPDATE " + tableName + "\nSET\n");
 
+            final Object[] newRowKeys = newRow.keySet().toArray(); // Keys of new row values
+            final Object[] newRowValues = newRow.values().toArray(); // Pair of new row values
+
+            // Append the first statement for
+            // proper SQL statement formatting
+            sqlStatement.append( "  " + newRowKeys[0]  + " = '" + newRowValues[0] + "'" );
+
             // This loop will be used to append
             // the key-value pair of the new row
-            for ( Map.Entry<?, ?> row : newRow.entrySet() ) {
-                sqlStatement.append( "  " + row.getKey() + " = '" + row.getValue() + "'\n," );
+            for ( int i = 1; i < newRow.size(); i++ ) {
+                sqlStatement.append( ",\n" );
+                sqlStatement.append( "  " + newRowKeys[ i ]  + " = '" + newRowValues[ i ] + "'" );
             }
-
             sqlStatement.append( "\nWHERE\n" );
+
+            final Object[] oldRowKeys = oldRow.keySet().toArray(); // Keys of old row values
+            final Object[] oldRowValues = oldRow.values().toArray(); // Pair of old row values
+
+            sqlStatement.append( "  " + oldRowKeys[0]  + " = '" + oldRowValues[0] + "'" );
 
             // This loop will be used to append
             // the key-value pair of the old row
-            for ( Map.Entry<?, ?> row : oldRow.entrySet() ) {
-                sqlStatement.append( "  " + row.getKey() + " = '" + row.getValue() + "' AND\n" );
+            for ( int i = 1; i < oldRow.size(); i++ ) {
+                sqlStatement.append( " AND\n" );
+                sqlStatement.append( "  " + oldRowKeys[ i ]  + " = '" + oldRowValues[ i ] + "'" );
             }
             sqlStatement.append( ";" );
 
@@ -277,11 +290,17 @@ public class Database {
         try ( final java.sql.Connection conn = dataSource.getConnection() ) {
             final StringBuilder sqlStatement = new StringBuilder( "DELETE FROM " + tableName + " WHERE\n" );
 
+            final Object[] selectedRowKeys = rowToBeDeleted.keySet().toArray(); // Keys of the selected row for deletion
+            final Object[] selectedRowValues = rowToBeDeleted.values().toArray(); // Pair of the selected row for deletion
+
+            sqlStatement.append( "    " + selectedRowKeys[0] + " = " + " '" + selectedRowValues[0] + "'" );
+
             // This loop will be used to append
             // the column and its relative row
             // value
-            for ( Map.Entry< String, Object > column : rowToBeDeleted.entrySet() ) {
-                sqlStatement.append( " AND\n    " + column.getKey() + " = " + " '" + column.getValue() + "' AND\n" );
+            for ( int i = 1; i < rowToBeDeleted.size(); i++ ) {
+                sqlStatement.append( " AND\n" );
+                sqlStatement.append( "    " + selectedRowKeys[ i ] + " = " + " '" + selectedRowValues[ i ] + "'" );
             }
             sqlStatement.append( ";" );
 
